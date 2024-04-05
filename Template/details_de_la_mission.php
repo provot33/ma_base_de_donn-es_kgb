@@ -42,7 +42,7 @@
                 <option value="envoi_d'une_brochure_tarifaire">Envoi d'une brochure tarifaire</option>
           </select>
          </div>
-         <div> 
+         <div>
          <label for="email">Email</label>
          <input type="email" name="email" placeholder="email@.fr" required="">
             </div>
