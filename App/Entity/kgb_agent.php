@@ -1,9 +1,9 @@
 <?php
-namespace kgbAgent;
+namespace App\Entity;
 
+use App\Entity\Nationality;
+use App\Entity\Speciality;
 use DateTime;
-use nationality\Nationality;
-use speciality\Speciality;
 
 class KgbAgent
 {
@@ -12,11 +12,21 @@ class KgbAgent
     protected DateTime $dateOfBirth;
     protected string $identificationCode;
     protected Nationality $nationality;
-    protected array $speciality;
+    protected array $specialities;
+
+    public function __construct($name,
+        $firstName, $dateOfBirth, $identificationCode, $nationality, $specialities) {
+        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->dateOfBirth = $dateOfBirth;
+        $this->identificationCode = $identificationCode;
+        $this->nationality = $nationality;
+        $this->specialities = $specialities;
+    }
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -26,7 +36,7 @@ class KgbAgent
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -36,7 +46,7 @@ class KgbAgent
 
     /**
      * Get the value of firstName
-     */ 
+     */
     public function getFirstName()
     {
         return $this->firstName;
@@ -46,7 +56,7 @@ class KgbAgent
      * Set the value of firstName
      *
      * @return  self
-     */ 
+     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
@@ -56,7 +66,7 @@ class KgbAgent
 
     /**
      * Get the value of dateOfBirth
-     */ 
+     */
     public function getDateOfBirth()
     {
         return $this->dateOfBirth;
@@ -66,7 +76,7 @@ class KgbAgent
      * Set the value of dateOfBirth
      *
      * @return  self
-     */ 
+     */
     public function setDateOfBirth($dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
@@ -76,7 +86,7 @@ class KgbAgent
 
     /**
      * Get the value of identificationCode
-     */ 
+     */
     public function getIdentificationCode()
     {
         return $this->identificationCode;
@@ -86,7 +96,7 @@ class KgbAgent
      * Set the value of identificationCode
      *
      * @return  self
-     */ 
+     */
     public function setIdentificationCode($identificationCode)
     {
         $this->identificationCode = $identificationCode;
@@ -96,7 +106,7 @@ class KgbAgent
 
     /**
      * Get the value of nationality
-     */ 
+     */
     public function getNationality()
     {
         return $this->nationality;
@@ -106,7 +116,7 @@ class KgbAgent
      * Set the value of nationality
      *
      * @return  self
-     */ 
+     */
     public function setNationality($nationality)
     {
         $this->nationality = $nationality;
@@ -115,23 +125,23 @@ class KgbAgent
     }
 
     /**
-     * Get the value of speciality, 
-     * 
+     * Get the value of speciality,
+     *
      * @return  array
-     */ 
-    public function getSpeciality()
+     */
+    public function getSpecialities()
     {
-        return $this->speciality;
+        return $this->specialities;
     }
 
     /**
      * Set the value of speciality
      *
      * @return  self
-     */ 
-    public function setSpeciality(array $speciality)
+     */
+    public function setSpecialities(array $specialities)
     {
-        $this->speciality = $speciality;
+        $this->specialities = $specialities;
 
         return $this;
     }
@@ -140,13 +150,11 @@ class KgbAgent
      * Add one Speciality to the agent's specialities
      *
      * @return  self
-     */ 
+     */
     public function addSpeciality(Speciality $speciality)
     {
-        $this->speciality[] = $speciality;
+        $this->specialities[] = $speciality;
 
         return $this;
     }
 };
-
-$myKgbAgent = new KgbAgent();

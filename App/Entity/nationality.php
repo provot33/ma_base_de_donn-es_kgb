@@ -1,9 +1,14 @@
 <?php
-namespace nationality;
+namespace App\Entity;
 
 class Nationality
 {
     protected string $country;
+
+    public function __construct($country)
+    {
+        $this->country = $country;
+    }
 
     /**
      * Get the value of country
@@ -26,4 +31,3 @@ class Nationality
     }
 };
 
-$myNationality = new Nationality();

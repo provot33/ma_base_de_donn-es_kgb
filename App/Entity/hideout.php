@@ -1,7 +1,7 @@
 <?php
-namespace hideout;
+namespace App\Entity;
 
-use nationality\Nationality;
+use App\Entity\Nationality;
 
 class Hideout
 {
@@ -115,6 +115,11 @@ class Hideout
 class HideoutType
 {
     protected string $hideoutType;
+
+    public function __construct($hideoutType)
+    {
+        $this->hideoutType = $hideoutType;
+    }
 
     /**
      * Get the value of hideoutType

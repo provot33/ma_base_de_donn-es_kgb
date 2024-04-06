@@ -1,8 +1,8 @@
 <?php
-namespace contact;
+namespace App\Entity;
 
+use App\Entity\Nationality;
 use DateTime;
-use nationality\Nationality;
 
 class Contact
 {
@@ -11,6 +11,16 @@ class Contact
     protected DateTime $dateOfBirth;
     protected string $codeName;
     protected Nationality $nationality;
+
+    public function __construct(
+        $name, $firstName, $dateOfBirth, $codeName, $nationality
+    ) {
+        $this->name = $name;
+        $this->name = $firstName;
+        $this->name = $dateOfBirth;
+        $this->name = $codeName;
+        $this->name = $nationality;
+    }
 
     /**
      * Get the value of name
@@ -112,7 +122,3 @@ class Contact
         return $this;
     }
 };
-
-$myContact = new Contact();
-
-?>

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+define('_ROOTPATH_', __DIR__);
+?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">

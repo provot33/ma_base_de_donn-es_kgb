@@ -1,9 +1,14 @@
 <?php
-namespace speciality;
+namespace App\Entity;
 
 class Speciality
 {
     protected string $labelOfSpeciality;
+
+    public function __construct($labelOfSpeciality)
+    {
+        $this->labelOfSpeciality = $labelOfSpeciality;
+    }
 
     /**
      * Get the value of labelOfSpeciality
@@ -25,5 +30,3 @@ class Speciality
         return $this;
     }
 };
-
-$mySpeciality = new Speciality();

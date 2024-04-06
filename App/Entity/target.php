@@ -1,16 +1,24 @@
 <?php
-namespace target;
+namespace App\Entity;
 
 use DateTime;
-use nationality\Nationality;
 
 class Target
 {
     protected string $name;
     protected string $firstName;
     protected DateTime $dateOfBirth;
-    protected string $codeNam;
+    protected string $codeName;
     protected Nationality $nationality;
+
+    public function __construct($name, $firstName, $dateOfBirth, $codeName, $nationality)
+    {
+        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->dateOfBirth = $dateOfBirth;
+        $this->codeName = $codeName;
+        $this->nationality = $nationality;
+    }
 
     /**
      * Get the value of name
@@ -75,9 +83,9 @@ class Target
     /**
      * Get the value of codeNam
      */
-    public function getCodeNam()
+    public function getCodeName()
     {
-        return $this->codeNam;
+        return $this->codeName;
     }
 
     /**
@@ -85,16 +93,16 @@ class Target
      *
      * @return  self
      */
-    public function setCodeNam($codeNam)
+    public function setCodeName($codeName)
     {
-        $this->codeNam = $codeNam;
+        $this->codeName = $codeName;
 
         return $this;
     }
 
     /**
      * Get the value of nationality
-     */ 
+     */
     public function getNationality()
     {
         return $this->nationality;
@@ -104,7 +112,7 @@ class Target
      * Set the value of nationality
      *
      * @return  self
-     */ 
+     */
     public function setNationality($nationality)
     {
         $this->nationality = $nationality;
@@ -113,4 +121,3 @@ class Target
     }
 };
 
-$monTarget = new Target();

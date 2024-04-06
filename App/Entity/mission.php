@@ -1,13 +1,13 @@
 <?php
-namespace mission;
+namespace App\Entity;
 
-use contact\Contact;
+use App\Entity\Contact;
+use App\Entity\Hideout;
+use App\Entity\KgbAgent;
+use App\Entity\Nationality;
+use App\Entity\Speciality;
+use App\Entity\Target;
 use DateTime;
-use hideout\Hideout;
-use kgbAgent\KgbAgent;
-use nationality\Nationality;
-use speciality\Speciality;
-use target\Target;
 
 class Mission
 {
@@ -20,10 +20,23 @@ class Mission
     protected Nationality $nationality;
     protected MissionType $missionType;
     protected MissionStatus $missionStatus;
-    protected array $kgbAgent;
-    protected array $contact;
-    protected array $target;
-    protected array $hideout;
+    protected array $kgbAgents;
+    protected array $contacts;
+    protected array $targets;
+    protected array $hideouts;
+
+    public function __construct($title, $description, $codeName,
+        $startDate, $finishDate, $speciality, $nationality, $missionType, $missionStatus) {
+        $this->title = $title;
+        $this->description = $description;
+        $this->codeName = $codeName;
+        $this->startDate = $startDate;
+        $this->finishDate = $finishDate;
+        $this->speciality = $speciality;
+        $this->nationality = $nationality;
+        $this->missionType = $missionType;
+        $this->missionStatus = $missionStatus;
+    }
 
     /**
      * Get the value of title
@@ -127,7 +140,7 @@ class Mission
 
     /**
      * Get the value of speciality
-     */ 
+     */
     public function getSpeciality()
     {
         return $this->speciality;
@@ -137,7 +150,7 @@ class Mission
      * Set the value of speciality
      *
      * @return  self
-     */ 
+     */
     public function setSpeciality($speciality)
     {
         $this->speciality = $speciality;
@@ -147,7 +160,7 @@ class Mission
 
     /**
      * Get the value of nationality
-     */ 
+     */
     public function getNationality()
     {
         return $this->nationality;
@@ -157,7 +170,7 @@ class Mission
      * Set the value of nationality
      *
      * @return  self
-     */ 
+     */
     public function setNationality($nationality)
     {
         $this->nationality = $nationality;
@@ -167,7 +180,7 @@ class Mission
 
     /**
      * Get the value of missionType
-     */ 
+     */
     public function getMissionType()
     {
         return $this->missionType;
@@ -177,7 +190,7 @@ class Mission
      * Set the value of missionType
      *
      * @return  self
-     */ 
+     */
     public function setMissionType($missionType)
     {
         $this->missionType = $missionType;
@@ -187,7 +200,7 @@ class Mission
 
     /**
      * Get the value of missionStatus
-     */ 
+     */
     public function getMissionStatus()
     {
         return $this->missionStatus;
@@ -197,7 +210,7 @@ class Mission
      * Set the value of missionStatus
      *
      * @return  self
-     */ 
+     */
     public function setMissionStatus($missionStatus)
     {
         $this->missionStatus = $missionStatus;
@@ -207,22 +220,22 @@ class Mission
 
     /**
      * Get the value of kgbAgent
-     * 
+     *
      * @return array
-     */ 
-    public function getKgbAgent()
+     */
+    public function getKgbAgents()
     {
-        return $this->kgbAgent;
+        return $this->kgbAgents;
     }
 
     /**
      * Set the value of kgbAgent
      *
      * @return  self
-     */ 
-    public function setKgbAgent($kgbAgent)
+     */
+    public function setKgbAgents($kgbAgents)
     {
-        $this->kgbAgent = $kgbAgent;
+        $this->kgbAgents = $kgbAgents;
 
         return $this;
     }
@@ -231,32 +244,32 @@ class Mission
      * Add one agent to the mission's agents
      *
      * @return  self
-     */ 
+     */
     public function addKgbAgent(KgbAgent $kgbAgent)
     {
-        $this->kgbAgent[] = $kgbAgent;
+        $this->kgbAgents[] = $kgbAgent;
 
         return $this;
     }
 
     /**
      * Get the value of contact
-     * 
+     *
      * @return array
-     */ 
-    public function getContact()
+     */
+    public function getContacts()
     {
-        return $this->contact;
+        return $this->contacts;
     }
 
     /**
      * Set the value of contact
      *
      * @return  self
-     */ 
-    public function setContact($contact)
+     */
+    public function setContacts($contacts)
     {
-        $this->contact = $contact;
+        $this->contacts = $contacts;
 
         return $this;
     }
@@ -265,32 +278,32 @@ class Mission
      * Add one contact to the mission's contacts
      *
      * @return  self
-     */ 
+     */
     public function addContact(Contact $contact)
     {
-        $this->contact[] = $contact;
+        $this->contacts[] = $contact;
 
         return $this;
     }
 
     /**
      * Get the value of target
-     * 
+     *
      * @return array
-     */ 
-    public function getTarget()
+     */
+    public function getTargets()
     {
-        return $this->target;
+        return $this->targets;
     }
 
     /**
      * Set the value of target
      *
      * @return  self
-     */ 
-    public function setTarget($target)
+     */
+    public function setTargets($targets)
     {
-        $this->target = $target;
+        $this->targets = $targets;
 
         return $this;
     }
@@ -299,30 +312,30 @@ class Mission
      * Add one contact to the mission's contacts
      *
      * @return  self
-     */ 
+     */
     public function addTarget(Target $target)
     {
-        $this->target[] = $target;
+        $this->targets[] = $target;
 
         return $this;
     }
 
     /**
      * Get the value of hideout
-     */ 
-    public function getHideout()
+     */
+    public function getHideouts()
     {
-        return $this->hideout;
+        return $this->hideouts;
     }
 
     /**
      * Set the value of hideout
      *
      * @return  self
-     */ 
-    public function setHideout($hideout)
+     */
+    public function setHideouts($hideouts)
     {
-        $this->hideout = $hideout;
+        $this->hideouts = $hideouts;
 
         return $this;
     }
@@ -331,10 +344,10 @@ class Mission
      * Add one hideout to the mission's hideouts
      *
      * @return  self
-     */ 
+     */
     public function addHideout(Hideout $hideout)
     {
-        $this->hideout[] = $hideout;
+        $this->hideouts[] = $hideout;
 
         return $this;
     }
@@ -342,14 +355,19 @@ class Mission
 
 class MissionStatus
 {
-    protected string $statutName;
+    protected string $statusName;
+
+    public function __contruct($statusName)
+    {
+        $this->statusName = $statusName;
+    }
 
     /**
      * Get the value of statutName
      */
-    public function getStatutName()
+    public function getStatusName()
     {
-        return $this->statutName;
+        return $this->statusName;
     }
 
     /**
@@ -357,9 +375,9 @@ class MissionStatus
      *
      * @return  self
      */
-    public function setStatutName($statutName)
+    public function setStatusName($statusName)
     {
-        $this->statutName = $statutName;
+        $this->statusName = $statusName;
 
         return $this;
     }
@@ -369,6 +387,10 @@ class MissionType
 {
     protected string $typeName;
 
+    public function __contruct($typeName)
+    {
+        $this->typeName = $typeName;
+    }
     /**
      * Get the value of typeName
      */
@@ -389,7 +411,3 @@ class MissionType
         return $this;
     }
 };
-
-$myMission = new Mission();
-$myMissionStatus = new MissionStatus();
-$myMissionType = new MissionType();
