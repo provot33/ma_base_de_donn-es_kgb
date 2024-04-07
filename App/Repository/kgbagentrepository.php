@@ -26,9 +26,9 @@ class KgbAgentRepository extends Repository
             foreach ($kgbAgents as $kgbAgent) {
                 $specialityRepository = new SpecialityRepository();
                 $specialitiesArray = $specialityRepository->findAllByKgbAgentId($kgbAgent['id_kgb_agent']);
-                $kgbAgentsArray[] = new KgbAgent($kgbAgent['name'], $kgbAgent['firstName'],
+                $kgbAgentsArray[] = new KgbAgent($kgbAgent['name'], $kgbAgent['firstname'],
                     new DateTime($kgbAgent['dateOfBirth']), $kgbAgent['identificationCode'], 
-                    new Nationality($kgbAgent['nationality']), $specialitiesArray);
+                    new Nationality($kgbAgent['country']), $specialitiesArray);
             }
         }
 

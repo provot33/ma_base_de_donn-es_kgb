@@ -53,6 +53,50 @@
     </fieldset>
 </main>
 <footer></footer>
+<?php 
+use App\Repository\MissionRepository;
+// use App\Entity\Mission;
 
+$missionRepository = new MissionRepository();
+$missionsArray = $missionRepository->getAll();
+/**
+echo '<script>';
+    echo 'const vehicules = [';
+    $premierElem = true;
+    // On récupère les véhicules présents dans la table et on alimente le javascript pour permettre de filtrer
+    foreach ($pdo->query('SELECT * FROM VEHICULE', PDO::FETCH_ASSOC) as $vehicule) {
+        if ($premierElem) {
+            $premierElem = false;
+        } else {
+            echo ',';
+        }
+        echo '{marque: "'.$vehicule['MARQUE'].'", modele: "'.$vehicule['MODELE'].'",';
+        echo ' urlMiniature: "'.$vehicule['URLMINIATURE'].'", kilometrage: "'.$vehicule['KILOMETRAGE'].'",';
+        echo ' motorisation: "'.$vehicule['MOTORISATION'].'", prix: "'.$vehicule['PRIX'].'",';
+        echo ' nbPortes: "'.$vehicule['NOMBRE_DE_PORTES'].'",';
+        echo ' miseEnAvant1: "'.str_replace("\"", "\\\"", $vehicule['MISE_EN_AVANT1']).'",';
+        echo ' miseEnAvant2: "'.str_replace("\"", "\\\"", $vehicule['MISE_EN_AVANT2']).'",';
+        echo ' miseEnAvant3: "'.str_replace("\"", "\\\"", $vehicule['MISE_EN_AVANT3']).'",';
+        echo ' miseEnAvant4: "'.str_replace("\"", "\\\"", $vehicule['MISE_EN_AVANT4']).'",';
+        echo ' miseEnAvant5: "'.str_replace("\"", "\\\"", $vehicule['MISE_EN_AVANT5']).'",';
+        echo 'annee: "'.$vehicule['ANNEE'].'", identifiant: "'.$vehicule['IDENTIFIANT'].'"}';
+    }
+    echo '];';
+    echo '</script>';
+ */
+echo '<script>';
+echo 'const vehicules = [';
+$premierElem = true;
+foreach ($missionsArray as $mission){
+    if ($premierElem) {
+        $premierElem = false;
+    } else {
+        echo ',';
+    }
+    echo '{titre: "'.$mission->getTitle().'", description: "'.$mission->getDescription().'",';
+    echo ' codeName: "'.$mission->getCodeName().'", startDate: "'.$mission->getStartDate().'",';
+    echo ' finishDate: "'.$mission->getFinishDate().'", '; 
+}
+?>
 </body>
 </html>

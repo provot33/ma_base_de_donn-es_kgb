@@ -24,9 +24,9 @@ class TargetRepository extends Repository
 
         if ($targets) {
             foreach ($targets as $target) {
-                $targetsArray[] = new Target($target['name'], $target['firstName'],
+                $targetsArray[] = new Target($target['name'], $target['firstname'],
                     new DateTime($target['dateOfBirth']), $target['codeName'], 
-                    new Nationality($target['nationality']));
+                    new Nationality($target['country']));
             }
         }
 

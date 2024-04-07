@@ -24,12 +24,12 @@ class ContactRepository extends Repository
 
         if ($contacts) {
             foreach ($contacts as $contact) {
-                $contactsArray[] = new Contact($contact['name'], $contact['firstName'],
+                $contactsArray[] = new Contact($contact['name'], $contact['firstname'],
                     new DateTime($contact['dateOfBirth']), $contact['codeName'], 
-                    new Nationality($contact['nationality']));
+                    new Nationality($contact['country']));
             }
         }
 
-        return $targetsArray;
+        return $contactsArray;
     }
 }

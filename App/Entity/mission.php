@@ -7,6 +7,8 @@ use App\Entity\KgbAgent;
 use App\Entity\Nationality;
 use App\Entity\Speciality;
 use App\Entity\Target;
+use App\Entity\MissionType;
+use App\Entity\MissionStatus;
 use DateTime;
 
 class Mission
@@ -26,7 +28,7 @@ class Mission
     protected array $hideouts;
 
     public function __construct($title, $description, $codeName,
-        $startDate, $finishDate, $speciality, $nationality, $missionType, $missionStatus) {
+        $startDate, $finishDate, $speciality, $nationality) {
         $this->title = $title;
         $this->description = $description;
         $this->codeName = $codeName;
@@ -34,8 +36,6 @@ class Mission
         $this->finishDate = $finishDate;
         $this->speciality = $speciality;
         $this->nationality = $nationality;
-        $this->missionType = $missionType;
-        $this->missionStatus = $missionStatus;
     }
 
     /**
@@ -353,61 +353,3 @@ class Mission
     }
 };
 
-class MissionStatus
-{
-    protected string $statusName;
-
-    public function __contruct($statusName)
-    {
-        $this->statusName = $statusName;
-    }
-
-    /**
-     * Get the value of statutName
-     */
-    public function getStatusName()
-    {
-        return $this->statusName;
-    }
-
-    /**
-     * Set the value of statutName
-     *
-     * @return  self
-     */
-    public function setStatusName($statusName)
-    {
-        $this->statusName = $statusName;
-
-        return $this;
-    }
-};
-
-class MissionType
-{
-    protected string $typeName;
-
-    public function __contruct($typeName)
-    {
-        $this->typeName = $typeName;
-    }
-    /**
-     * Get the value of typeName
-     */
-    public function getTypeName()
-    {
-        return $this->typeName;
-    }
-
-    /**
-     * Set the value of typeName
-     *
-     * @return  self
-     */
-    public function setTypeName($typeName)
-    {
-        $this->typeName = $typeName;
-
-        return $this;
-    }
-};

@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\MissionStatus;
 use App\Entity\MissionType;
@@ -20,13 +19,12 @@ class MissionRepository extends Repository
                 JOIN nationality n ON n.id_nationality = m.id_nationality
                 JOIN missionType mt ON mt.id_type = m.id_type
                 JOIN missionStatus ms ON ms.id_status = m.id_status");
-        //$query->bindParam(':movie_id', $movie_id, $this->pdo::PARAM_STR);
         $query->execute();
         $missions = $query->fetchAll($this->pdo::FETCH_ASSOC);
 
         $missionsArray = [];
 
-        if ($missions) {
+        if ($missions) {              
             foreach ($missions as $mission) {
                 $kgbAgentRepository = new KgbAgentRepository();
                 $kgbAgentsArray = $kgbAgentRepository->findAllByMissionId($mission['id_mission']);
@@ -39,8 +37,13 @@ class MissionRepository extends Repository
                 $missionToAdd = new Mission($mission['title'], $mission['description'], $mission['codeName'],
                     new DateTime($mission['startDate']), new DateTime($mission['finishDate']),
                     new Speciality($mission['labelOfSpeciality']),
-                    new Nationality($mission['country']), new MissionType($mission['typeName']),
-                    new MissionStatus($mission['statusName']));
+                    new Nationality($mission['country']));
+                $missionType = new MissionType();
+                $missionType->setTypeName($mission['typeName']);
+                $missionStatus = new MissionStatus();
+                $missionStatus->setStatusName($mission['statusName']);
+                $missionToAdd->setMissionType($missionType);
+                $missionToAdd->setMissionStatus($missionStatus);
                 $missionToAdd->setKgbAgents($kgbAgentsArray);
                 $missionToAdd->setTargets($targetsArray);
                 $missionToAdd->setContacts($contactsArray);

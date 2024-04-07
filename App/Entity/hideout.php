@@ -11,6 +11,16 @@ class Hideout
     protected Nationality $nationality;
     protected HideoutType $hideoutType;
 
+    public function __construct(
+        $adress, $code, $city, $nationality, $hideoutType
+    ) {
+        $this->adress = $adress;
+        $this->code = $code;
+        $this->city = $city;
+        $this->nationality = $nationality;
+        $this->hideoutType = $hideoutType;
+    }
+
     /**
      * Get the value of adress
      */
@@ -93,7 +103,7 @@ class Hideout
 
     /**
      * Get the value of hideoutType
-     */ 
+     */
     public function getHideoutType()
     {
         return $this->hideoutType;
@@ -103,7 +113,7 @@ class Hideout
      * Set the value of hideoutType
      *
      * @return  self
-     */ 
+     */
     public function setHideoutType($hideoutType)
     {
         $this->hideoutType = $hideoutType;
@@ -141,8 +151,3 @@ class HideoutType
         return $this;
     }
 }
-
-$myHideout = new Hideout();
-$myHideoutType = new HideoutType();
-
-?>

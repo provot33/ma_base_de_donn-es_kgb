@@ -13,6 +13,7 @@ class HideoutRepository extends Repository
         $query = $this->pdo->prepare(
             "SELECT * FROM hideout h
                 JOIN hideoutForMission hfm ON hfm.id_hideout = h.id_hideout
+                JOIN hideoutType ht ON ht.id_hideoutType = h.id_hideoutType
                 JOIN nationality n ON n.id_nationality = h.id_nationality
                 WHERE hfm.id_mission = :id_mission
                 ORDER BY h.adress, h.code ASC");
@@ -25,7 +26,7 @@ class HideoutRepository extends Repository
         if ($hideouts) {
             foreach ($hideouts as $hideout) {
                 $hideoutsArray[] = new Hideout($hideout['adress'], $hideout['code'],
-                    $hideout['city'], new Nationality($hideout['nationality']), 
+                    $hideout['city'], new Nationality($hideout['country']), 
                     new HideoutType($hideout['hideoutType']));
             }
         }

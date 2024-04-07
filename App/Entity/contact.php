@@ -16,10 +16,10 @@ class Contact
         $name, $firstName, $dateOfBirth, $codeName, $nationality
     ) {
         $this->name = $name;
-        $this->name = $firstName;
-        $this->name = $dateOfBirth;
-        $this->name = $codeName;
-        $this->name = $nationality;
+        $this->firstName = $firstName;
+        $this->dateOfBirth = $dateOfBirth;
+        $this->codeName = $codeName;
+        $this->nationality = $nationality;
     }
 
     /**
