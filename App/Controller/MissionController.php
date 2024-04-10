@@ -2,22 +2,17 @@
 
 namespace App\Controller;
 
-use App\Repository\AdministratorRepository;
-use App\Entity\Administrator;
+use App\Repository\MissionRepository;
 
-
-class AdministratorController extends Controller
+class MissionController extends Controller
 {
     public function route(): void
     {
         try {
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
-                    case 'register':
-                        $this->register();
-                        break;
-                    case 'delete':
-                        // Appeler méthode delete()
+                    case 'list':
+                        $this->list();
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
@@ -27,26 +22,25 @@ class AdministratorController extends Controller
                 throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('/errors/default', [
                 'error' => $e->getMessage()
             ]);
         }
     }
-  
-    protected function register()
+
+    protected function list()
     {
         try {
-            $errors = [];
-            // $user = new Administrator();
+            // Récupérer toutes les missions
+            $missionRepository = new MissionRepository();
+            $missions = $missionRepository->getAll();
 
-            $this->render('user/add_edit', [
-                'user' => '',
-                'pageTitle' => 'Inscription',
-                'errors' => $errors
+            $this->render('/mission/list', [
+                'missions' => $missions,
             ]);
 
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('/errors/default', [
                 'error' => $e->getMessage()
             ]);
         } 
