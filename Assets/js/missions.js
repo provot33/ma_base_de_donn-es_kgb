@@ -1,6 +1,11 @@
 // Index permettant de savoir quelle est la mission à afficher
 let missionIndex = 0;
 
+function convertDate(dateDb) {
+    const date = ''+dateDb;
+    return date.substring(8,10) + '/' + date.substring(5,7) + '/' + date.substring(0,4);
+}
+
 // Permet de se déplacer dans les missions
 // n : le nombre de missions qu'on parcourt par rapport à celle en cours.
 //     peut-être négatif pour faire marche arrière
@@ -47,7 +52,7 @@ function ajouteAgent(agent, premierElement) {
     let dossier = '<div id="'+ agent.identificationCode +'" class="tabcontent_agent"' + (premierElement?" style=\"display: block;\"":"") + '>';
     dossier += '<h3>Agent : ' + agent.identificationCode + '</h3>';
     dossier += '<p>Nom : ' + agent.name + ' Prénom : ' + agent.firstName + '</p>';
-    dossier += '<p>Né le : ' + agent.dateOfBirth + '</p>';
+    dossier += '<p>Né le : ' + convertDate(agent.dateOfBirth) + '</p>';
     dossier += '<p>Pays : ' + agent.nationality + '</p>';
     dossier += '<p>Domaine d\'expertise : </p>';    
     dossier += '<div><table>';
@@ -63,7 +68,7 @@ function ajouteTarget(target, premierElement) {
     let dossier = '<div id="'+ target.codeName +'" class="tabcontent_target"' + (premierElement?" style=\"display: block;\"":"") + '>';
     dossier += '<h3>Cible : ' + target.codeName + '</h3>';
     dossier += '<p>Nom : ' + target.name + ' Prénom : ' + target.firstName + '</p>';
-    dossier += '<p>Né le : ' + target.dateOfBirth + '</p>';
+    dossier += '<p>Né le : ' + convertDate(target.dateOfBirth) + '</p>';
     dossier += '<p>Pays : ' + target.nationality + '</p></div>';
     return dossier;
 };
@@ -73,7 +78,7 @@ function ajouteContact(contact, premierElement) {
     let dossier = '<div id="'+ contact.codeName +'" class="tabcontent_contact"' + (premierElement?" style=\"display: block;\"":"") + '>';
     dossier += '<h3>Contact : ' + contact.codeName + '</h3>';
     dossier += '<p>Nom : ' + contact.name + ' Prénom : ' + contact.firstName + '</p>';
-    dossier += '<p>Né le : ' + contact.dateOfBirth + '</p>';
+    dossier += '<p>Né le : ' + convertDate(contact.dateOfBirth) + '</p>';
     dossier += '<p>Pays : ' + contact.nationality + '</p></div>';
     return dossier;
 };
@@ -94,25 +99,17 @@ function ajouteMission(mission) {
     carte += '<h2>Titre de la mission : ' + mission.titre + '</h2>';
     carte += '<div>Description : ' + mission.description + '</div>';
     carte += '<h3>Nom de Code : ' + mission.codeName + '</h3>';
-    carte += '<div>De : ' + mission.startDate + ' à ' + mission.finishDate + '</div>';
+    carte += '<div>Commence le : ' + convertDate(mission.startDate) + ' Et doit finir avant le : ' + convertDate(mission.finishDate) + '</div>';
     carte += '<div>Spécialité requise : ' + mission.speciality + '</div>';
     carte += '<div>Localisation : ' + mission.nationality + '</div>';
     carte += '<div>Type de mission : ' + mission.missionType + '</div>';
     carte += '<div>Statut de la mission : ' + mission.missionStatus + ' </div>';
 
+    carte += '<section><div class="card">';
+
     let listeElements = '';
     let premierElement = true;
-    carte += '<div class="tab">';
-    mission.agents.forEach(agent => {
-        carte += '<button class="tablinks_agent' + (premierElement?" active":"") + '" onclick="openTabs(event, \'' + agent.identificationCode + '\', \'agent\')">' + agent.identificationCode + '</button>';
-        listeElements += ajouteAgent(agent, premierElement);
-        premierElement = false;
-    });
-    carte += '</div>' + listeElements;
-
-    listeElements = '';
-    premierElement = true;
-    carte += '<div class="tab">';
+    carte += '<h2>Cibles désignées :</h2><div class="tab">';
     mission.targets.forEach(target => {
         carte += '<button class="tablinks_target' + (premierElement?" active":"") + '"" onclick="openTabs(event, \'' + target.codeName + '\', \'target\')">' + target.codeName + '</button>';
         listeElements += ajouteTarget(target, premierElement);
@@ -120,9 +117,23 @@ function ajouteMission(mission) {
     })
     carte += '</div>' + listeElements;
 
+    carte += '</div><div class="card">';
+
     listeElements = '';
     premierElement = true;
-    carte += '<div class="tab">';
+    carte += '<h2>Agents enrolés pour cette mission :</h2><div class="tab">';
+    mission.agents.forEach(agent => {
+        carte += '<button class="tablinks_agent' + (premierElement?" active":"") + '" onclick="openTabs(event, \'' + agent.identificationCode + '\', \'agent\')">' + agent.identificationCode + '</button>';
+        listeElements += ajouteAgent(agent, premierElement);
+        premierElement = false;
+    });
+    carte += '</div>' + listeElements;
+
+    carte += '</div></section><section><div class="card">';
+
+    listeElements = '';
+    premierElement = true;
+    carte += '<h2>Contacts disponibles :</h2><div class="tab">';
     mission.contacts.forEach(contact => {
         carte += '<button class="tablinks_contact' + (premierElement?" active":"") + '"" onclick="openTabs(event, \'' + contact.codeName + '\', \'contact\')">' + contact.codeName + '</button>';
         listeElements += ajouteContact(contact, premierElement);
@@ -130,15 +141,19 @@ function ajouteMission(mission) {
     })
     carte += '</div>' + listeElements;
 
+    carte += '</div><div class="card">';
+
     listeElements = '';
     premierElement = true;
-    carte += '<div class="tab">';
+    carte += '<h2>Planques mises à disposition :</h2><div class="tab">';
     mission.hideouts.forEach(hideout => {
         carte += '<button class="tablinks_hideout' + (premierElement?" active":"") + '"" onclick="openTabs(event, \'' + hideout.hideoutType + '\', \'hideout\')">' + hideout.hideoutType + '</button>';
         listeElements += ajouteHideout(hideout, premierElement);
         premierElement = false;
     })
     carte += '</div>' + listeElements;
+
+    carte += '</div></section>';
 
     carte += '<hr></hr>';
 

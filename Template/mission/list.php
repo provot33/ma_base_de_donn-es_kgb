@@ -1,14 +1,13 @@
 <head>
-    <link rel="stylesheet" href="/Assets/css/site.css">
+    <link rel="stylesheet" href="/Assets/css/style.css">
 </head>
 <?php require_once _TEMPLATEPATH_ . '/header.php';?>
 <h1>Liste des Missions</h1>
-
-<div class="slideshow-container">
 <div><a class="prev" onclick="plusMissions(-1)">&#10094;</a></div>
+<div class="slideshow-container">
     <div id="liste_mission"></div> 
-<div><a class="next" onclick="plusMissions(1)">&#10095;</a></div>
 </div>
+<div><a class="next" onclick="plusMissions(1)">&#10095;</a></div>
 
 <?php require_once _TEMPLATEPATH_ . '/footer.php';
 
