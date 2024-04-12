@@ -11,6 +11,17 @@ class Administrator
     protected string $password;
     protected DateTime $creationDate;
 
+    public function __construct(
+        $name, $firstName, $email, $password, $creationDate
+    )
+    {
+        $this->name = $name;
+        $this->firstName =  $firstName;
+        $this->email =  $email;
+        $this->password =  $password;
+        $this->creationDate =  $creationDate;
+    }
+
     /**
      * Get the value of name
      */ 
@@ -110,6 +121,30 @@ class Administrator
 
         return $this;
     }
+
+    /**
+     * Verify the password
+     *
+     * @return  boolean true if the password is ok, false if it is wrong
+     */ 
+    public function verifyPassword(string $password): bool
+    {
+        if (password_verify($password, $this->password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if the user is connected
+     * 
+     * @return boolean true if the user is already logged in, false elseway
+     */
+    public static function isLogged(): bool
+    {
+        return isset($_SESSION['user']);
+    }
 };
 
-$myAdministrator = new Administrator();
+

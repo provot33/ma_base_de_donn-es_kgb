@@ -1,0 +1,104 @@
+h1, .connexion {
+  text-align: center;
+  font-family: "kremlin";
+ }
+ 
+ /* Style du panneau */
+ .tab {
+    overflow: hidden;
+    border: none;
+    background-color: #FFFFFF;
+    margin-top: 15px;
+  }
+  
+  /* Style des onglets du panneau */
+  .tab button {
+    background-color: #fffcaf;
+    border: 1px solid #7d7d7d;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    width: 120px;
+  }
+  
+  /* Changement de la couleur de l'onglet au survol */
+  .tab button:hover {
+    background-color: #d4d190;
+    border: 1px solid #7d7d7d;
+  }
+  
+  /* Défini l'onglet actif */
+  .tab button.active {
+    background-color: #eae57d;
+    border: 1px solid #7d7d7d;
+  }
+  
+  /* Style à l'intérieur du panneau */
+  .tabcontent,
+  .tabcontent_agent,
+  .tabcontent_target,
+  .tabcontent_contact,
+  .tabcontent_hideout {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #7d7d7d;
+    background-color: #eae57d;  
+  } 
+
+.slideshow-container {
+  max-width: 90%;
+  position: relative;
+  margin: auto;
+}
+
+  /* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: #ab0000;
+  font-weight: bold;
+  font-size: 64px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: #6e0303;
+}
+
+table, tr, td {
+  border: 2px;
+  border-color: #6e0303;
+  border-style: solid;
+  background-color: #f5edb9;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  display: block;
+  max-width: 46%;
+  min-width: 46%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
