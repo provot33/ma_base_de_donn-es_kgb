@@ -11,6 +11,7 @@ session_set_cookie_params([
 session_start();
 define('_ROOTPATH_', __DIR__);
 define('_TEMPLATEPATH_', __DIR__.'/Template');
+spl_autoload_extensions(".php");
 spl_autoload_register();
 // spl_autoload_register(function ($class){
 //    require_once _ROOTPATH_. '/' . strtolower(str_replace('\\', '/', $class) . '.php');
