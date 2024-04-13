@@ -16,9 +16,9 @@ spl_autoload_register(function ($class){
    require_once _ROOTPATH_. '/' . strtolower(str_replace('\\', '/', $class) . '.php');
 });
 
-use App\Controller\Controller;
+use Controller\Controller;
 // Nous avons besoin de cette classe pour verifier si l'utilisateur est connecté
-use App\Entity\Administrator;
+use Entity\Administrator;
 
 
 $controller = new Controller();
