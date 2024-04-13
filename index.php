@@ -14,7 +14,7 @@ define('_TEMPLATEPATH_', __DIR__.'/Template');
 spl_autoload_extensions(".php");
 spl_autoload_register();
 spl_autoload_register(function ($class){
-   require_once _ROOTPATH_. '/' . strtolower(str_replace('\\', '/', $class) . '.php');
+   require_once _ROOTPATH_. '/' . str_replace('\\', '/', $class) . '.php';
 });
 
 use App\Controller\Controller;
