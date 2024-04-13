@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Db\Mysql;
 use App\Repository\AdministratorRepository;
 
 class AuthentController extends Controller
