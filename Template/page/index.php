@@ -16,7 +16,5 @@
     <a href="./?controller=authent&action=login" class="button">Accéder au site</a>
     </div>
 
-    
-
 </body>
 </html>
