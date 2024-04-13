@@ -12,29 +12,16 @@ session_start();
 define('_ROOTPATH_', __DIR__);
 define('_TEMPLATEPATH_', __DIR__.'/Template');
 spl_autoload_register();
-spl_autoload_register(function ($class){
-   require_once _ROOTPATH_. '/' . strtolower(str_replace('\\', '/', $class) . '.php');
-});
+// spl_autoload_register(function ($class){
+//    require_once _ROOTPATH_. '/' . strtolower(str_replace('\\', '/', $class) . '.php');
+// });
 
-use Controller\Controller;
+use App\Controller\Controller;
 // Nous avons besoin de cette classe pour verifier si l'utilisateur est connecté
-use Entity\Administrator;
+use App\Entity\Administrator;
 
 
 $controller = new Controller();
 $controller->route();
 
-// session_set_cookie_params([
-//     'lifetime' => 3600,
-//     'path' => '/',
-//     'domain' => $_SERVER['SERVER_NAME'],
-//     'httponly' => true
-// ]);
-//session_start();
-// define('_ROOTPATH_', __DIR__);
-
-//  spl_autoload_extensions(".php"); // comma-separated list
-
-// require __DIR__ . "/App/Repository/mission_repository.php";
-// use App\Entity\Mission;
 ?>
