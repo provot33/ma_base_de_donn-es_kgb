@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Db\Mysql;
 use App\Repository\AdministratorRepository;
 
-class AuthController extends Controller
+class AuthentController extends Controller
 {
     public function route(): void
     {
@@ -40,10 +40,8 @@ class AuthController extends Controller
         if (isset($_POST['loginUser'])) {
 
             $administratorRepository = new AdministratorRepository();
-
-            $administrator = $administratorRepository->findOneByEmail($_POST['email']);
-
-            if ($administrator && $administrator->verifyPassword($_POST['password'])) {
+            $administrator = $administratorRepository->findOneByEmail($_POST['email']);    
+            if ($administrator && $administratorRepository->verifyPassword($_POST['password'], $administrator->getPassword())) {
                 // Regénère l'id session pour éviter la fixation de session
                 session_regenerate_id(true);
                 $_SESSION['user'] = [
@@ -51,13 +49,13 @@ class AuthController extends Controller
                     'first_name' => $administrator->getFirstName(),
                     'last_name' => $administrator->getName()
                 ];
-                header('location: index.php');
+                header('location: index.php?controller=mission&action=list');
             } else {
                 $errors[] = 'Email ou mot de passe incorrect';
             }
         }
 
-        $this->render('auth/login', [
+        $this->render('/authent/login', [
             'errors' => $errors,
         ]);
     }
@@ -71,6 +69,6 @@ class AuthController extends Controller
         session_destroy();
         //Supprime les données du tableau $_SESSION
         unset($_SESSION);
-        header ('location: index.php?controller=auth&action=login');
+        header ('location: index.php?controller=authent&action=login');
     }
 }

@@ -21,4 +21,11 @@ class AdministratorRepository extends Repository
             return null;
         }
     }
+
+    public function verifyPassword(string $userPassword, string $dbPassword)
+    {
+        $requete ="SELECT PASSWORD('".$userPassword."') AS PASSCRYPT";
+        $passEncrypt = $this->pdo->query($requete)->fetch()['PASSCRYPT'];
+        return $dbPassword == $passEncrypt;
+    }
 };
