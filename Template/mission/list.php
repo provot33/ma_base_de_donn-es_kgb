@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/Assets/css/style.css">
 </head>
 <?php require_once _TEMPLATEPATH_ . '/header.php';?>
+<a href="./?controller=authent&action=logout" class="logout button">Déconnexion</a>
 <h1>Liste des Missions</h1>
 <div><a class="prev" onclick="plusMissions(-1)">&#10094;</a></div>
 <div class="slideshow-container">

@@ -24,7 +24,6 @@ use App\Controller\Controller;
 // Nous avons besoin de cette classe pour verifier si l'utilisateur est connecté
 use App\Entity\Administrator;
 
-
 $controller = new Controller();
 $controller->route();
 

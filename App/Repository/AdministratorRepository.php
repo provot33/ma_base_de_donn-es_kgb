@@ -21,4 +21,22 @@ class AdministratorRepository extends Repository
             return null;
         }
     }
+
+    /**
+     * Fonction de vérification du mot de passe
+     * 
+     * On doit vérifier le mot de passe encrypté en utilisant la même fonction
+     * que celle utilisé à l'insertion en base, donc la fonction de la base de données.
+     * 
+     * @param userPassword le mot de passe rentré par l'utilisateur.
+     * @param dbPassword le mot de passe en base qui sert de référence.
+     * 
+     * @return true si l'encryption du userPassword correspond au dbPassword, false sinon.
+     */
+    public function verifyPassword(string $userPassword, string $dbPassword)
+    {
+        $requete ="SELECT PASSWORD('".$userPassword."') AS PASSCRYPT";
+        $passEncrypt = $this->pdo->query($requete)->fetch()['PASSCRYPT'];
+        return $dbPassword == $passEncrypt;
+    }
 };

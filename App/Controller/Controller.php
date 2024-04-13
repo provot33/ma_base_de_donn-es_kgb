@@ -14,23 +14,16 @@ class Controller
                         $controller = new PageController();
                         $controller->route();
                         break;
-                    case 'auth':
-                        //charger controleur auth
-                        $controller = new AuthController();
-                        $controller->route();
-                        break;
-                    case 'administrator':
-                        $controller = new AdministratorController();
+                    case 'authent':
+                        //charger controleur authent
+                        $controller = new AuthentController();
                         $controller->route();
                         break;
                     case 'mission':
+                        //charger controleur mission
                         $controller = new MissionController();
                         $controller->route();
                         break;
-                    // case 'detail':
-                    //     $controller = new DetailController();
-                    //     $controller->route();
-                    //     break;
                     default:
                         throw new \Exception("Le controleur n'existe pas");
                         break;
