@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/Assets/css/style.css" type="text/css">
     <title>Les missions top secretes du KGB</title>
 </head>
-<!-- <script src="script.js"></script> -->
+
 <body>
     <h1>Les missions top secrètes du KGB</h1>
 
