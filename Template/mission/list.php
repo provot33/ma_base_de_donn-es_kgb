@@ -11,15 +11,10 @@
 
 <?php require_once _TEMPLATEPATH_ . '/footer.php';
 
-use App\Repository\MissionRepository;
-
-$missionRepository = new MissionRepository();
-$missionsArray = $missionRepository->getAll();
-
 echo '<script>';
 echo 'const missions = [';
 $premierElem = true;
-foreach ($missionsArray as $mission) {
+foreach ($missions as $mission) {
     if ($premierElem) {
         $premierElem = false;
     } else {
