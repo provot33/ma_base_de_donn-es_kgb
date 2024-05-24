@@ -34,6 +34,10 @@ function openTabs(evt, idElement, tabType) {
     evt.currentTarget.className += " active";
 };
 
+function afficheMissionCombo() {
+    afficheMission(document.getElementById("mission-select").value);
+}
+
 // Affiche la mission choisie
 function afficheMission(index) {
     // On vide le conteneur liste_mission de son HTML

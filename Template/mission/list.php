@@ -10,15 +10,17 @@ if (isset($_SESSION['user'])){
 <h1>Liste des Missions</h1>
 <!-- <div><a class="prev" onclick="plusMissions(-1)">&#10094;</a></div> -->
 <?php
-echo '<select name="mission-list" id="mission-select">';
+echo '<select name="mission-list" id="mission-select" onchange="afficheMissionCombo()">';
 $selected=true;
+$index =0;
 foreach ($missions as $mission) {
-    echo '<option value="'.$mission->getTitle().'"';
-    if ($selected) {
-        echo ' selected';
-        $selected = false;
-    }
+    echo '<option value="'.$index.'"';
+    // if ($selected) {
+    //     echo ' selected';
+    //     $selected = false;
+    // }
     echo '>'.$mission->getTitle().'</option>';
+    $index++;
 }
 echo '</select>';
 ?>
