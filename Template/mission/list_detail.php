@@ -8,33 +8,18 @@ if (isset($_SESSION['user'])){
 }
 ?>
 <h1>Liste des Missions</h1>
-<!-- <div><a class="prev" onclick="plusMissions(-1)">&#10094;</a></div> -->
-<?php
-echo '<select name="mission-list" id="mission-select">';
-$selected=true;
-foreach ($missions as $mission) {
-    echo '<option value="'.$mission->getTitle().'"';
-    if ($selected) {
-        echo ' selected';
-        $selected = false;
-    }
-    echo '>'.$mission->getTitle().'</option>';
-}
-echo '</select>';
-?>
-
+<div><a class="prev" onclick="plusMissions(-1)">&#10094;</a></div>
 <div class="slideshow-container">
     <div id="liste_mission"></div> 
 </div>
-<!-- <div><a class="next" onclick="plusMissions(1)">&#10095;</a></div> -->
-
+<div><a class="next" onclick="plusMissions(1)">&#10095;</a></div>
 
 <?php require_once _TEMPLATEPATH_ . '/footer.php';
 
 echo '<script>';
 echo 'const missions = [';
 $premierElem = true;
-foreach ($missions as $mission) {    
+foreach ($missions as $mission) {
     if ($premierElem) {
         $premierElem = false;
     } else {

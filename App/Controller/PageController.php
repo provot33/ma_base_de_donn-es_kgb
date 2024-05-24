@@ -37,8 +37,8 @@ class PageController extends Controller
     protected function home()
     {   
         $this->render('/page/index', [
-            'test' => 555,
-            'nom' => "John",
+            // 'test' => 555,
+            // 'nom' => "John",
         ]);
     }
 

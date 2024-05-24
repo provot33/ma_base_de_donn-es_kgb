@@ -14,6 +14,9 @@ class MissionController extends Controller
                     case 'list':
                         $this->list();
                         break;
+                    case 'list_detail':
+                        $this->list_detail();
+                        break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
                         break;
@@ -36,6 +39,24 @@ class MissionController extends Controller
             $missions = $missionRepository->getAll();
 
             $this->render('/mission/list', [
+                'missions' => $missions,
+            ]);
+
+        } catch (\Exception $e) {
+            $this->render('/errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    protected function list_detail()
+    {
+        try {
+            // Récupérer toutes les missions
+            $missionRepository = new MissionRepository();
+            $missions = $missionRepository->getAll();
+
+            $this->render('/mission/list_detail', [
                 'missions' => $missions,
             ]);
 
