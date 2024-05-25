@@ -34,8 +34,8 @@ class MissionRepository extends Repository
                 $contactsArray = $contactRepository->findAllByMissionId($mission['id_mission']);
                 $hideoutRepository = new HideoutRepository();
                 $hideoutsArray = $hideoutRepository->findAllByMissionId($mission['id_mission']);
-                $missionToAdd = new Mission($mission['title'], $mission['description'], $mission['codeName'],
-                    new DateTime($mission['startDate']), new DateTime($mission['finishDate']),
+                $missionToAdd = new Mission($mission['id_mission'],$mission['title'], $mission['description'], 
+                    $mission['codeName'], new DateTime($mission['startDate']), new DateTime($mission['finishDate']),
                     new Speciality($mission['labelOfSpeciality']),
                     new Nationality($mission['country']));
                 $missionType = new MissionType();
@@ -53,5 +53,47 @@ class MissionRepository extends Repository
         }
 
         return $missionsArray;
+    }
+
+    public function getMission($idMission): Mission
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM mission m
+                JOIN speciality s ON s.id_speciality = m.id_speciality
+                JOIN nationality n ON n.id_nationality = m.id_nationality
+                JOIN missionType mt ON mt.id_type = m.id_type
+                JOIN missionStatus ms ON ms.id_status = m.id_status
+                WHERE id_mission = :id_mission");
+        $query->bindParam(':id_mission', $idMission, $this->pdo::PARAM_STR);
+        $query->execute();
+        $mission = $query->fetch($this->pdo::FETCH_ASSOC);
+
+        if ($mission) {              
+            $kgbAgentRepository = new KgbAgentRepository();
+            $kgbAgentsArray = $kgbAgentRepository->findAllByMissionId($mission['id_mission']);
+            $targetRepository = new TargetRepository();
+            $targetsArray = $targetRepository->findAllByMissionId($mission['id_mission']);
+            $contactRepository = new ContactRepository();
+            $contactsArray = $contactRepository->findAllByMissionId($mission['id_mission']);
+            $hideoutRepository = new HideoutRepository();
+            $hideoutsArray = $hideoutRepository->findAllByMissionId($mission['id_mission']);
+            $missionToAdd = new Mission($mission['id_mission'],$mission['title'], $mission['description'], 
+                $mission['codeName'], new DateTime($mission['startDate']), new DateTime($mission['finishDate']),
+                new Speciality($mission['labelOfSpeciality']),
+                new Nationality($mission['country']));
+            $missionType = new MissionType();
+            $missionType->setTypeName($mission['typeName']);
+            $missionStatus = new MissionStatus();
+            $missionStatus->setStatusName($mission['statusName']);
+            $missionToAdd->setMissionType($missionType);
+            $missionToAdd->setMissionStatus($missionStatus);
+            $missionToAdd->setKgbAgents($kgbAgentsArray);
+            $missionToAdd->setTargets($targetsArray);
+            $missionToAdd->setContacts($contactsArray);
+            $missionToAdd->setHideouts($hideoutsArray);
+            $mission = $missionToAdd;
+        }
+
+        return $mission;
     }
 }

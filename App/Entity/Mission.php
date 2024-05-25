@@ -4,15 +4,16 @@ namespace App\Entity;
 use App\Entity\Contact;
 use App\Entity\Hideout;
 use App\Entity\KgbAgent;
+use App\Entity\MissionStatus;
+use App\Entity\MissionType;
 use App\Entity\Nationality;
 use App\Entity\Speciality;
 use App\Entity\Target;
-use App\Entity\MissionType;
-use App\Entity\MissionStatus;
 use DateTime;
 
 class Mission
 {
+    protected int $id;
     protected string $title;
     protected string $description;
     protected string $codeName;
@@ -27,8 +28,9 @@ class Mission
     protected array $targets;
     protected array $hideouts;
 
-    public function __construct($title, $description, $codeName,
+    public function __construct($id, $title, $description, $codeName,
         $startDate, $finishDate, $speciality, $nationality) {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->codeName = $codeName;
@@ -36,6 +38,14 @@ class Mission
         $this->finishDate = $finishDate;
         $this->speciality = $speciality;
         $this->nationality = $nationality;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -352,4 +362,3 @@ class Mission
         return $this;
     }
 };
-
