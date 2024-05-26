@@ -33,8 +33,11 @@ $index=0;
 foreach ($missions as $mission) {
     echo '<tr>';
     // echo '<td><label onClick="afficheMission('.$index.')">Lien</label></td>';
-    echo '<td><a href="./?controller=mission&action=detail&mission='.$mission->getId().'">Detail</td>';
-    
+    if (isset($_SESSION['user'])){
+        echo '<td><a href="./?controller=admin&action=modify&mission='.$mission->getId().'">Modifier</td>';
+    } else {
+        echo '<td><a href="./?controller=mission&action=detail&mission='.$mission->getId().'">Detail</td>';
+    }
     echo '<td>'.$mission->getTitle().'</td>';
     echo '<td>'.$mission->getStartDate()->format('Y-m-d').'</td>';
     echo '<td>'.$mission->getFinishDate()->format('Y-m-d').'</td>';
@@ -45,6 +48,15 @@ foreach ($missions as $mission) {
 }
 echo '</table></div>';
 
+if (isset($_SESSION['user'])){
+    echo '<h1>Gestion des données</h1>';
+    echo '<h2>Types de missions</h2>';
+    echo '<h2>Statuts de missions</h2>';
+    echo '<h2>Spécialités possibles</h2>';
+    echo '<h2>Types de planques</h2>';
+    echo '<h2>Pays suivis</h2>';
+    
+}
 ?>
 
 <!-- <div class="slideshow-container">

@@ -48,7 +48,7 @@ class AuthentController extends Controller
                     'first_name' => $administrator->getFirstName(),
                     'last_name' => $administrator->getName()
                 ];
-                header('location: index.php?controller=mission&action=list');
+                header('location: index.php?controller=admin&action=list');
             } else {
                 $errors[] = 'Email ou mot de passe incorrect';
             }
