@@ -24,11 +24,9 @@ class MissionRepository extends Repository
             $missionToAdd = new Mission($mission['id_mission'],$mission['title'], $mission['description'], 
                 $mission['codeName'], new DateTime($mission['startDate']), new DateTime($mission['finishDate']),
                 new Speciality($mission['id_speciality'], $mission['labelOfSpeciality']),
-                new Nationality($mission['country']));
+                new Nationality($mission['id_nationality'], $mission['country']));
             $missionType = new MissionType($mission['id_type'], $mission['typeName']);
-            $missionType->setTypeName($mission['typeName']);
-            $missionStatus = new MissionStatus();
-            $missionStatus->setStatusName($mission['statusName']);
+            $missionStatus = new MissionStatus($mission['id_status'], $mission['statusName']);
             $missionToAdd->setMissionType($missionType);
             $missionToAdd->setMissionStatus($missionStatus);
             $missionToAdd->setKgbAgents($kgbAgentsArray);

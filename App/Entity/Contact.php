@@ -6,6 +6,7 @@ use DateTime;
 
 class Contact
 {
+    protected int $idContact;
     protected string $name;
     protected string $firstName;
     protected DateTime $dateOfBirth;
@@ -13,13 +14,22 @@ class Contact
     protected Nationality $nationality;
 
     public function __construct(
-        $name, $firstName, $dateOfBirth, $codeName, $nationality
+        $idContact, $name, $firstName, $dateOfBirth, $codeName, $nationality
     ) {
+        $this->idContact = $idContact;
         $this->name = $name;
         $this->firstName = $firstName;
         $this->dateOfBirth = $dateOfBirth;
         $this->codeName = $codeName;
         $this->nationality = $nationality;
+    }
+
+    /**
+     * Get the value of name
+     */
+    public function getIdContact()
+    {
+        return $this->idContact;
     }
 
     /**

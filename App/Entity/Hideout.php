@@ -2,9 +2,11 @@
 namespace App\Entity;
 
 use App\Entity\Nationality;
+use App\Entity\HideoutType;
 
 class Hideout
 {
+    protected int $idHideout;
     protected string $adress;
     protected int $code;
     protected string $city;
@@ -12,14 +14,24 @@ class Hideout
     protected HideoutType $hideoutType;
 
     public function __construct(
-        $adress, $code, $city, $nationality, $hideoutType
+        $idHideout, $adress, $code, $city, $nationality, $hideoutType
     ) {
+        $this->idHideout= $idHideout;
         $this->adress = $adress;
         $this->code = $code;
         $this->city = $city;
         $this->nationality = $nationality;
         $this->hideoutType = $hideoutType;
     }
+
+    /**
+     * Get the value of id
+     */
+    public function getIdHideout()
+    {
+        return $this->idHideout;
+    }
+
 
     /**
      * Get the value of adress
@@ -117,37 +129,7 @@ class Hideout
     public function setHideoutType($hideoutType)
     {
         $this->hideoutType = $hideoutType;
-
-        return $this;
-    }
-};
-
-class HideoutType
-{
-    protected string $hideoutType;
-
-    public function __construct($hideoutType)
-    {
-        $this->hideoutType = $hideoutType;
-    }
-
-    /**
-     * Get the value of hideoutType
-     */
-    public function getHideoutType()
-    {
-        return $this->hideoutType;
-    }
-
-    /**
-     * Set the value of hideoutType
-     *
-     * @return  self
-     */
-    public function setHideoutType($hideoutType)
-    {
-        $this->hideoutType = $hideoutType;
-
+        
         return $this;
     }
 }

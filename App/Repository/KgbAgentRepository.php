@@ -8,6 +8,29 @@ use DateTime;
 
 class KgbAgentRepository extends Repository
 {
+    public function getAll(): array
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM kgbagent ka
+                JOIN nationality n ON n.id_nationality = ka.id_nationality");
+        $query->execute();
+        $kgbAgents = $query->fetchAll($this->pdo::FETCH_ASSOC);
+
+        $kgbAgentsArray = [];
+
+        if ($kgbAgents) {              
+            foreach ($kgbAgents as $kgbAgent) {
+                $specialityRepository = new SpecialityRepository();
+                $specialitiesArray = $specialityRepository->findAllByKgbAgentId($kgbAgent['id_kgb_agent']);
+                $kgbAgentsArray[] = new KgbAgent($kgbAgent['id_kgb_agent'], $kgbAgent['name'], $kgbAgent['firstname'],
+                    new DateTime($kgbAgent['dateOfBirth']), $kgbAgent['identificationCode'], 
+                    new Nationality($kgbAgent['id_nationality'], $kgbAgent['country']), $specialitiesArray);
+            }
+        }
+
+        return $kgbAgentsArray;
+    }
+
     public function findAllByMissionId(int $id_mission): array
     {
         $query = $this->pdo->prepare(
@@ -26,9 +49,9 @@ class KgbAgentRepository extends Repository
             foreach ($kgbAgents as $kgbAgent) {
                 $specialityRepository = new SpecialityRepository();
                 $specialitiesArray = $specialityRepository->findAllByKgbAgentId($kgbAgent['id_kgb_agent']);
-                $kgbAgentsArray[] = new KgbAgent($kgbAgent['name'], $kgbAgent['firstname'],
+                $kgbAgentsArray[] = new KgbAgent($kgbAgent['id_kgb_agent'], $kgbAgent['name'], $kgbAgent['firstname'],
                     new DateTime($kgbAgent['dateOfBirth']), $kgbAgent['identificationCode'], 
-                    new Nationality($kgbAgent['country']), $specialitiesArray);
+                    new Nationality($kgbAgent['id_nationality'], $kgbAgent['country']), $specialitiesArray);
             }
         }
 

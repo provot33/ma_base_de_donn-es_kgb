@@ -8,6 +8,27 @@ use DateTime;
 
 class TargetRepository extends Repository
 {
+    public function getAll(): array
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM target t
+                JOIN nationality n ON n.id_nationality = t.id_nationality");
+        $query->execute();
+        $targets = $query->fetchAll($this->pdo::FETCH_ASSOC);
+
+        $targetsArray = [];
+
+        if ($targets) {
+            foreach ($targets as $target) {
+                $targetsArray[] = new Target($target['id_target'], $target['name'], $target['firstname'],
+                    new DateTime($target['dateOfBirth']), $target['codeName'], 
+                    new Nationality($target['id_nationality'], $target['country']));
+            }
+        }
+
+        return $targetsArray;
+    }
+
     public function findAllByMissionId(int $id_mission): array
     {
         $query = $this->pdo->prepare(
@@ -24,9 +45,9 @@ class TargetRepository extends Repository
 
         if ($targets) {
             foreach ($targets as $target) {
-                $targetsArray[] = new Target($target['name'], $target['firstname'],
+                $targetsArray[] = new Target($target['id_target'], $target['name'], $target['firstname'],
                     new DateTime($target['dateOfBirth']), $target['codeName'], 
-                    new Nationality($target['country']));
+                    new Nationality($target['id_nationality'], $target['country']));
             }
         }
 

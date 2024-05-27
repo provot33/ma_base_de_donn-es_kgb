@@ -1,15 +1,15 @@
 <?php
 namespace App\Entity;
 
-class typeName
+class HideoutType
 {
     protected int $idHideoutType;
-    protected string $hideoutYpe;
+    protected string $hideoutType;
 
-    public function __construct($idHideoutType, $hideoutYpe)
+    public function __construct($idHideoutType, $hideoutType)
     {
         $this->idHideoutType = $idHideoutType;
-        $this->hideoutYpe = $hideoutYpe;
+        $this->hideoutType = $hideoutType;
     }
     
     /**
@@ -23,9 +23,9 @@ class typeName
     /**
      * Get the value of typeName
      */
-    public function getHideoutYpe()
+    public function getHideoutType()
     {
-        return $this->hideoutYpe;
+        return $this->hideoutType;
     }
 
     /**
@@ -33,9 +33,9 @@ class typeName
      *
      * @return  self
      */
-    public function setHideoutYpe($hideoutYpe)
+    public function setHideoutType($hideoutType)
     {
-        $this->hideoutYpe = $hideoutYpe;
+        $this->hideoutType = $hideoutType;
 
         return $this;
     }

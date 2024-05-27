@@ -5,19 +5,29 @@ use DateTime;
 
 class Target
 {
+    protected int $idTarget;
     protected string $name;
     protected string $firstName;
     protected DateTime $dateOfBirth;
     protected string $codeName;
     protected Nationality $nationality;
 
-    public function __construct($name, $firstName, $dateOfBirth, $codeName, $nationality)
+    public function __construct($idTarget, $name, $firstName, $dateOfBirth, $codeName, $nationality)
     {
+        $this->idTarget = $idTarget;
         $this->name = $name;
         $this->firstName = $firstName;
         $this->dateOfBirth = $dateOfBirth;
         $this->codeName = $codeName;
         $this->nationality = $nationality;
+    }
+
+    /**
+     * Get the value of name
+     */
+    public function getIdTarget()
+    {
+        return $this->idTarget;
     }
 
     /**

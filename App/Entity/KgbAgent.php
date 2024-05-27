@@ -7,6 +7,7 @@ use DateTime;
 
 class KgbAgent
 {
+    protected int $idAgent;
     protected string $name;
     protected string $firstName;
     protected DateTime $dateOfBirth;
@@ -14,14 +15,23 @@ class KgbAgent
     protected Nationality $nationality;
     protected array $specialities;
 
-    public function __construct($name,
+    public function __construct($idAgent, $name,
         $firstName, $dateOfBirth, $identificationCode, $nationality, $specialities) {
+        $this->idAgent = $idAgent;
         $this->name = $name;
         $this->firstName = $firstName;
         $this->dateOfBirth = $dateOfBirth;
         $this->identificationCode = $identificationCode;
         $this->nationality = $nationality;
         $this->specialities = $specialities;
+    }
+
+    /**
+     * Get the value of name
+     */
+    public function getIdAgent()
+    {
+        return $this->idAgent;
     }
 
     /**

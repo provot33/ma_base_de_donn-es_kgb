@@ -3,13 +3,22 @@ namespace App\Entity;
 
 class Nationality
 {
+    protected int $idNationality;
     protected string $country;
 
-    public function __construct($country)
+    public function __construct($idNationality, $country)
     {
+        $this->idNationality = $idNationality;
         $this->country = $country;
     }
 
+    /**
+     * Get the value of typeName
+     */
+    public function getIdNationality()
+    {
+        return $this->idNationality;
+    }
     /**
      * Get the value of country
      */

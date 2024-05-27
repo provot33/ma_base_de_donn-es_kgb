@@ -24,6 +24,11 @@ class Controller
                         $controller = new MissionController();
                         $controller->route();
                         break;
+                    case 'admin':
+                        //charger controleur administrateur
+                        $controller = new AdminController();
+                        $controller->route();
+                        break;    
                     default:
                         throw new \Exception("Le controleur n'existe pas");
                         break;

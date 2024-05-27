@@ -2,9 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Hideout;
 use App\Entity\HideoutType;
-use App\Entity\Nationality;
 
 class HideoutTypeRepository extends Repository
 {

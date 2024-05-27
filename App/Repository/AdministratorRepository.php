@@ -7,6 +7,24 @@ use DateTime;
 
 class AdministratorRepository extends Repository
 {
+    public function getAll() {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM administrator a");
+        $query->execute();
+        $administrators = $query->fetchAll($this->pdo::FETCH_ASSOC);
+
+        $administratorArray = [];
+
+        if ($administrators) {              
+            foreach ($administrators as $administrator) {
+                $administratorArray[] = new Administrator($administrator['id_administrator'], $administrator['name'], 
+                    $administrator['firstname'], $administrator['email'], $administrator['password'], new DateTime($administrator['creationDate']));
+            }
+        }
+
+        return $administratorArray;
+    }
+
     public function findOneByEmail(string $email)
     {
         $query = $this->pdo->prepare("SELECT * FROM administrator WHERE email = :email");
@@ -14,7 +32,7 @@ class AdministratorRepository extends Repository
         $query->execute();
         $administrator = $query->fetch($this->pdo::FETCH_ASSOC);
         if ($administrator) {
-            return new Administrator($administrator['name'], $administrator['firstname'],
+            return new Administrator($administrator['id_administrator'], $administrator['name'], $administrator['firstname'],
             $administrator['email'], $administrator['password'], 
             new DateTime($administrator['creationDate']));
         } else {

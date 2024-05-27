@@ -5,6 +5,7 @@ use DateTime;
 
 class Administrator
 {
+    protected int $id;
     protected string $name;
     protected string $firstName;
     protected string $email;
@@ -12,14 +13,23 @@ class Administrator
     protected DateTime $creationDate;
 
     public function __construct(
-        $name, $firstName, $email, $password, $creationDate
+        $id, $name, $firstName, $email, $password, $creationDate
     )
     {
+        $this->id = $id;
         $this->name = $name;
         $this->firstName =  $firstName;
         $this->email =  $email;
         $this->password =  $password;
         $this->creationDate =  $creationDate;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
