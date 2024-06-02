@@ -6,7 +6,7 @@
 
 function alimenteComboNationality($nationalities, $valeur, $tableau): string
 {
-    $comboNationalite = '<select id="' . $tableau . '-nationality-select">';
+    $comboNationalite = '<select id="' . $tableau . '-nationality-select" disabled="">';
     foreach ($nationalities as $nationality) {
         $comboNationalite = $comboNationalite.'<option value="' . $nationality->getIdNationality() . '"';
         $comboNationalite = $comboNationalite.($nationality->getIdNationality() == $valeur ? ' selected' : '');
@@ -20,7 +20,7 @@ function alimenteComboNationality($nationalities, $valeur, $tableau): string
 
 function alimenteComboHideoutTypes($hideoutTypes, $valeur, $tableau): string
 {
-    $comboHideoutType = '<select id="' . $tableau . '-hideouttype-select">';
+    $comboHideoutType = '<select id="' . $tableau . '-hideouttype-select" disabled="">';
     foreach ($hideoutTypes as $hideoutType) {
         $comboHideoutType = $comboHideoutType.'<option value="' . $hideoutType->getIdHideoutType() . '"';
         $comboHideoutType = $comboHideoutType.($hideoutType->getIdHideoutType() == $valeur ? ' selected' : '');
