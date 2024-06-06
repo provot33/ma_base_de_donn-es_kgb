@@ -20,11 +20,7 @@ class MissionController extends Controller
                     case 'detail':
                         $idMission = $_GET['mission'];
                         $this->detail($idMission);
-                        break;
-                    case 'modify':
-                        $idMission = $_GET['mission'];
-                        $this->detail($idMission);
-                        break;        
+                        break;      
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
                         break;

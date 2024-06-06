@@ -11,7 +11,7 @@ class KgbAgentRepository extends Repository
     public function getAll(): array
     {
         $query = $this->pdo->prepare(
-            "SELECT * FROM kgbagent ka
+            "SELECT * FROM kgbAgent ka
                 JOIN nationality n ON n.id_nationality = ka.id_nationality");
         $query->execute();
         $kgbAgents = $query->fetchAll($this->pdo::FETCH_ASSOC);
