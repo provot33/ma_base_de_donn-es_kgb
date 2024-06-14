@@ -90,22 +90,29 @@ echo '</table></div>';
 if (isset($_SESSION['user'])) {
     echo '<h1>Gestion des données</h1>';
 
+    $index = 0;
     echo '<h2>Types de missions</h2>';
+    echo '<form id="typeMission">';
     echo '<div><table id="missions-types-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Libéllé type de mission</th>';
-    echo '</tr></thead>';
+    // echo '<th style="display:none;"></th><th>Id Table (PK)</th><th>Libéllé type de mission</th><th>Supprimer ?</th>';
+    echo '<th>Id Table (PK)</th><th style="display:none;">Reference</th><th>Libéllé type de mission</th><th>Supprimer ?</th>';
+    echo '</tr></thead><tbody>';
     foreach ($missionTypes as $missionType) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $missionType->getIdType() . '">Modifier</td>';
+        // echo '<td style="display:none;"><input type="hidden" id="typeNb_' . $index . '" name="typeNb_' . $index . '" value="typeNb_' . $index . '" /></td>';
         echo '<td>' . $missionType->getIdType() . '</td>';
-        echo '<td>' . $missionType->getTypeName() . '</td>';
+        echo '<td style="display:none;">' . $missionType->getTypeName() . '</td>';
+        echo '<td><input type="text" id="typename_'.$index.'" name="typename_'.$index.'" value="' . $missionType->getTypeName() . '" /></td>';
+        echo '<td><input type="checkbox" id="typeMissionSuppr_'.$index.'" name="typeMissionSuppr_'.$index.'" /></td>';
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</tbody></table></div><br />';
+    echo '<input id="typeMissionAdd" type="button" value="Ajouter une ligne" /> <input id="typeMissionUpdate" type="button"  value="Valider" /></form>';
 
     echo '<h2>Statuts de missions</h2>';
+    echo '<form id="statutMission">';
     echo '<div><table id="missions-status-list">';
     echo '<thead><tr>';
     echo ' <th></th><th>Id Table (PK)</th><th>Libéllé statut de mission</th>';
@@ -114,11 +121,12 @@ if (isset($_SESSION['user'])) {
         echo '<tr>';
         echo '<td><a href="./?controller=admin&action=modify&mission=' . $missionStatu->getIdStatus() . '">Modifier</td>';
         echo '<td>' . $missionStatu->getIdStatus() . '</td>';
-        echo '<td>' . $missionStatu->getStatusName() . '</td>';
+        echo '<td><input type="text" id="statusname_' . $missionStatu->getStatusName() . '" name="statusname_' . $missionStatu->getStatusName() . '" value="' . $missionStatu->getStatusName() . '" /></td>';
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</table></div><br />';
+    echo '<input id="statutMissionAdd" type="button" value="Ajouter une ligne" /> <input type="submit" value="Valider" /></form>';
 
     echo '<h2>Spécialités possibles</h2>';
     echo '<div><table id="specialities-list">';
@@ -354,5 +362,6 @@ if (isset($_SESSION['user'])) {
 //     echo ']}';
 // }
 // echo '];</script>';
-echo '<script src="/Assets/js/missions.js"></script>';
+// echo '<script src="/Assets/js/missions.js"></script>';
+echo '<script src="/Assets/js/gestion_missions.js"></script>';
 ?>
