@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\BookRepository;
-
 class PageController extends Controller
 {
     public function route(): void

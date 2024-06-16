@@ -28,7 +28,12 @@ class Controller
                         //charger controleur administrateur
                         $controller = new AdminController();
                         $controller->route();
-                        break;    
+                        break;
+                    case 'ajax':
+                        //charger controleur administrateur
+                        $controller = new AjaxController();
+                        $controller->route();
+                        break;
                     default:
                         throw new \Exception("Le controleur n'existe pas");
                         break;
