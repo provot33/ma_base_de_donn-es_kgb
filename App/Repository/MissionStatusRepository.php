@@ -22,4 +22,32 @@ class MissionStatusRepository extends Repository
 
         return $missionStatusArray;
     }
+
+    public function insert($statusName): void {
+        $query = $this->pdo->prepare(
+            "INSERT INTO missionStatus
+                (statusName)
+                VALUES
+                (:statusName)");
+        $query->bindParam(':statusName', $statusName, $this->pdo::PARAM_STR);
+        $query->execute();
+    }
+
+    public function update($id_status, $statusName): void {
+        $query = $this->pdo->prepare(
+            "UPDATE missionStatus
+                SET statusName = :statusName
+                WHERE id_status = :id_status");
+        $query->bindParam(':typeName', $statusName, $this->pdo::PARAM_STR);
+        $query->bindParam(':id_status', $id_status, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
+
+    public function delete($id_status): void {
+        $query = $this->pdo->prepare(
+            "DELETE FROM missionStatus
+                WHERE id_status = :id_status");
+        $query->bindParam(':id_status', $id_status, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
 }

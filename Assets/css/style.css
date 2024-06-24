@@ -148,11 +148,25 @@ td {
 
 th,
 td {
-  padding: 20px;
+  padding: 5px;
 }
 
 tbody td {
   text-align: center;
+}
+
+td > input[type='text']
+{
+    width: 95%; /*this will set the width of the textbox equal to its container td*/
+}
+
+.bouton_table {
+  text-align:end;
+}
+
+.bouton_table input[type='button'] {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 section {
@@ -193,7 +207,7 @@ section {
   padding-bottom: 20px;
 }
 
-label{
+label {
   width: 160px;
   text-align-last: right;
   margin-right: 15px;

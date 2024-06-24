@@ -22,4 +22,32 @@ class NationalityRepository extends Repository
 
         return $nationalitiesArray;
     }
+
+    public function insert($country): void {
+        $query = $this->pdo->prepare(
+            "INSERT INTO nationality
+                (country)
+                VALUES
+                (:country)");
+        $query->bindParam(':country', $country, $this->pdo::PARAM_STR);
+        $query->execute();
+    }
+
+    public function update($id_nationality, $country): void {
+        $query = $this->pdo->prepare(
+            "UPDATE nationality
+                SET country = :country
+                WHERE id_nationality = :id_nationality");
+        $query->bindParam(':country', $country, $this->pdo::PARAM_STR);
+        $query->bindParam(':id_nationality', $id_nationality, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
+
+    public function delete($id_nationality): void {
+        $query = $this->pdo->prepare(
+            "DELETE FROM nationality
+                WHERE id_nationality = :id_nationality");
+        $query->bindParam(':id_nationality', $id_nationality, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
 }

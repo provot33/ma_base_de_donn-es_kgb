@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="/Assets/css/style.css">
 </head>
@@ -109,87 +110,119 @@ if (isset($_SESSION['user'])) {
         $index++;
     }
     echo '</tbody></table></div><br />';
-    echo '<input id="typeMissionAdd" type="button" value="Ajouter une ligne" /> <input id="typeMissionUpdate" type="button"  value="Valider" /></form>';
+    echo '<div class="bouton_table"><input id="typeMissionAdd" type="button" value="Ajouter une ligne" /><input id="typeMissionUpdate" type="button" value="Valider" /></div></form>';
 
+    $index = 0;
     echo '<h2>Statuts de missions</h2>';
     echo '<form id="statutMission">';
     echo '<div><table id="missions-status-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Libéllé statut de mission</th>';
+    echo ' <th>Id Table (PK)</th><th style="display:none;">Reference</th><th>Libéllé statut de mission</th><th>Supprimer ?</th>';
     echo '</tr></thead>';
     foreach ($missionStatus as $missionStatu) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $missionStatu->getIdStatus() . '">Modifier</td>';
         echo '<td>' . $missionStatu->getIdStatus() . '</td>';
-        echo '<td><input type="text" id="statusname_' . $missionStatu->getStatusName() . '" name="statusname_' . $missionStatu->getStatusName() . '" value="' . $missionStatu->getStatusName() . '" /></td>';
+        echo '<td style="display:none;">' . $missionStatu->getStatusName() . '</td>';
+        echo '<td><input type="text" id="statusname_'.$index.'" name="statusname_'.$index.'" value="' . $missionStatu->getStatusName() . '" /></td>';
+        echo '<td><input type="checkbox" id="statusMissionSuppr_'.$index.'" name="statusMissionSuppr_'.$index.'" /></td>';
         echo '</tr>';
         $index++;
     }
     echo '</table></div><br />';
-    echo '<input id="statutMissionAdd" type="button" value="Ajouter une ligne" /> <input type="submit" value="Valider" /></form>';
+    echo '<div class="bouton_table"><input id="statutMissionAdd" type="button" value="Ajouter une ligne" /><input id="statutMissionUpdate" type="button" value="Valider" /></div></form>';
 
+    $index = 0;
     echo '<h2>Spécialités possibles</h2>';
     echo '<div><table id="specialities-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Libellé spécialité</th>';
+    echo ' <th>Id Table (PK)</th><th style="display:none;">Reference</th><th>Libéllé spécialité</th><th>Supprimer ?</th>';
     echo '</tr></thead>';
     foreach ($specialities as $speciality) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $speciality->getIdSpeciality() . '">Modifier</td>';
         echo '<td>' . $speciality->getIdSpeciality() . '</td>';
-        echo '<td>' . $speciality->getLabelOfSpeciality() . '</td>';
+        echo '<td style="display:none;">' . $speciality->getLabelOfSpeciality() . '</td>';
+        echo '<td><input type="text" id="specialityname_'.$index.'" name="specialityname_'.$index.'" value="' . $speciality->getLabelOfSpeciality() . '" /></td>';
+        echo '<td><input type="checkbox" id="specialitySuppr_'.$index.'" name="specialitySuppr_'.$index.'" /></td>';
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</table></div><br />';
+    echo '<div class="bouton_table"><input id="specialityAdd" type="button" value="Ajouter une ligne" /><input id="specialityUpdate" type="button" value="Valider" /></div></form>';
 
+    $index = 0;
     echo '<h2>Types de planques</h2>';
     echo '<div><table id="hideout-types-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Libellé type de Planque</th>';
+    echo ' <th>Id Table (PK)</th><th style="display:none;">Reference</th><th>Libellé type de Planque</th><th>Supprimer ?</th>';
     echo '</tr></thead>';
     foreach ($hideoutTypes as $hideoutType) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $hideoutType->getIdHideoutType() . '">Modifier</td>';
         echo '<td>' . $hideoutType->getIdHideoutType() . '</td>';
-        echo '<td>' . $hideoutType->getHideoutType() . '</td>';
+        echo '<td style="display:none;">' . $hideoutType->getHideoutType() . '</td>';
+        echo '<td><input type="text" id="hideoutTypename_'.$index.'" name="hideoutTypename_'.$index.'" value="' . $hideoutType->getHideoutType() . '" /></td>';
+        echo '<td><input type="checkbox" id="hideoutSuppr_'.$index.'" name="hideoutSuppr_'.$index.'" /></td>';
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</table></div><br />';
+    echo '<div class="bouton_table"><input id="hideoutTypeAdd" type="button" value="Ajouter une ligne" /><input id="hideoutTypeUpdate" type="button" value="Valider" /></div></form>';
 
+    $index = 0;
     echo '<h2>Pays suivis</h2>';
     echo '<div><table id="nationalities-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Nom du Pays</th>';
+    echo ' <th>Id Table (PK)</th><th style="display:none;">Reference</th><th>Nom du Pays</th><th>Supprimer ?</th>';
     echo '</tr></thead>';
     foreach ($nationalities as $nationality) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $nationality->getIdNationality() . '">Modifier</td>';
         echo '<td>' . $nationality->getIdNationality() . '</td>';
-        echo '<td>' . $nationality->getCountry() . '</td>';
+        echo '<td style="display:none;">' . $nationality->getCountry() . '</td>';
+        echo '<td><input type="text" id="nationalityname_'.$index.'" name="nationalityname_'.$index.'" value="' . $nationality->getCountry() . '" /></td>';
+        echo '<td><input type="checkbox" id="nationalitySuppr_'.$index.'" name="nationalitySuppr_'.$index.'" /></td>';
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</table></div><br />';
+    echo '<div class="bouton_table"><input id="nationalityAdd" type="button" value="Ajouter une ligne" /><input id="nationalityUpdate" type="button" value="Valider" /></div></form>';
 
+    $index = 0;
     echo '<h2>Administrateurs</h2>';
     echo '<div><table id="administrators-list">';
     echo '<thead><tr>';
-    echo ' <th></th><th>Id Table (PK)</th><th>Nom</th><th>Prénom</th><th>Adresse courriel</th><th>Date de création</th>';
+    echo '<th width="7%">Id Table (PK)</th>
+        <th style="display:none;">ReferenceNom</th><th>Nom</th>
+        <th style="display:none;">ReferencePrenom</th><th>Prénom</th>
+        <th style="display:none;">ReferenceCourriel</th><th>Adresse courriel</th>
+        <th style="display:none;">ReferencePassword</th><th>Mot de Passe</th>
+        <th style="display:none;">ReferenceDate</th><th>Date de création</th>
+        <th width="7%">Supprimer ?</th>';
     echo '</tr></thead>';
     foreach ($administrators as $administrator) {
         echo '<tr>';
-        echo '<td><a href="./?controller=admin&action=modify&mission=' . $administrator->getId() . '">Modifier</td>';
+
         echo '<td>' . $administrator->getId() . '</td>';
-        echo '<td>' . $administrator->getName() . '</td>';
-        echo '<td>' . $administrator->getFirstName() . '</td>';
-        echo '<td>' . $administrator->getEmail() . '</td>';
-        echo '<td>' . $administrator->getCreationDate()->format('Y-m-d') . '</td>';
+        echo '<td style="display:none;">' . $administrator->getName() . '</td>';
+        echo '<td><input type="text" id="adminstratorName_'.$index.'" name="adminstratorName_'.$index.'" value="' . $administrator->getName() . '" /></td>';
+        
+        echo '<td style="display:none;">' . $administrator->getFirstName() . '</td>';
+        echo '<td><input type="text" id="adminstratorFirstname_'.$index.'" name="adminstratorFirstname_'.$index.'" value="' . $administrator->getFirstName() . '" /></td>';
+        
+        echo '<td style="display:none;">' . $administrator->getEmail() . '</td>';
+        echo '<td><input type="text" id="adminstratorEmail_'.$index.'" name="adminstratorEmail_'.$index.'" value="' . $administrator->getEmail() . '" /></td>';
+        
+        echo '<td style="display:none;"></td>';
+        echo '<td><input type="text" id="adminstratorPwd_'.$index.'" name="adminstratorPwd_'.$index.'" value="" /></td>';
+        
+        echo '<td style="display:none;">' . $administrator->getCreationDate()->format('Y-m-d') . '</td>';
+        echo '<td><input type="text" id="adminstratorDate_'.$index.'" name="adminstratorDate_'.$index.'" value="' . $administrator->getCreationDate()->format('Y-m-d') . '" /></td>';
+        
+        echo '<td><input type="checkbox" id="adminstratorSuppr_'.$index.'" name="adminstratorSuppr_'.$index.'" /></td>';
+                
         echo '</tr>';
         $index++;
     }
-    echo '</table></div>';
+    echo '</table></div><br />';
+    echo '<div class="bouton_table"><input id="administratorAdd" type="button" value="Ajouter une ligne" /><input id="adminstratorUpdate" type="button" value="Valider" /></div></form>';
 
     echo '<h2>Agents du KGB</h2>';
     echo '<div><table id="kgbagents-list">';

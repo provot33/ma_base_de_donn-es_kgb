@@ -43,4 +43,32 @@ class SpecialityRepository extends Repository
 
         return $specialitiesArray;
     }
+
+    public function insert($labelOfSpeciality): void {
+        $query = $this->pdo->prepare(
+            "INSERT INTO speciality
+                (labelOfSpeciality)
+                VALUES
+                (:labelOfSpeciality)");
+        $query->bindParam(':labelOfSpeciality', $labelOfSpeciality, $this->pdo::PARAM_STR);
+        $query->execute();
+    }
+
+    public function update($id_speciality, $labelOfSpeciality): void {
+        $query = $this->pdo->prepare(
+            "UPDATE speciality
+                SET labelOfSpeciality = :labelOfSpeciality
+                WHERE id_speciality = :id_speciality");
+        $query->bindParam(':labelOfSpeciality', $labelOfSpeciality, $this->pdo::PARAM_STR);
+        $query->bindParam(':id_speciality', $id_speciality, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
+
+    public function delete($id_speciality): void {
+        $query = $this->pdo->prepare(
+            "DELETE FROM speciality
+                WHERE id_speciality = :id_speciality");
+        $query->bindParam(':id_speciality', $id_speciality, $this->pdo::PARAM_INT);
+        $query->execute();
+    }
 }
