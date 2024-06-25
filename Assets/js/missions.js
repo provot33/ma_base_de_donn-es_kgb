@@ -39,17 +39,17 @@ function afficheMissionCombo() {
 }
 
 // Affiche la mission choisie
-// function afficheMission(index) {
-//     // On vide le conteneur liste_mission de son HTML
-//     document.getElementById("liste_mission").innerHTML = "";
+function afficheMission(index) {
+    // On vide le conteneur liste_mission de son HTML
+    document.getElementById("liste_mission").innerHTML = "";
     
-//     // On vérifie que l'index pointe vers une mission qui existe, sinon on replace l'index.
-//     if (index < 0) {index = missions.length - 1;}
-//     if (index >= missions.length) {index = 0;}
-//     missionIndex = index;
-//     // On ajoute la mission choisie
-//     ajouteMission(missions[missionIndex]);
-// };
+    // On vérifie que l'index pointe vers une mission qui existe, sinon on replace l'index.
+    if (index < 0) {index = missions.length - 1;}
+    if (index >= missions.length) {index = 0;}
+    missionIndex = index;
+    // On ajoute la mission choisie
+    ajouteMission(missions[missionIndex]);
+};
 
 // Ajoute la liste des agents à la mission et la met en forme
 function ajouteAgent(agent, premierElement) {
@@ -165,4 +165,4 @@ function ajouteMission(mission) {
 };
 
 // À l'ouverture de la page, on affiche la mission par défaut (la première de la liste)
-// afficheMission(missionIndex);
+afficheMission(missionIndex);
