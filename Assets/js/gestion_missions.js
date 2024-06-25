@@ -104,29 +104,27 @@ function addAdministratorLine() {
   addLine(
     "administrators-list",
     [
-      "adminstratorName_",
-      "adminstratorFirstname_",
-      "adminstratorEmail_",
-      "adminstratorPwd_",
-      "adminstratorDate_",
+      "administratorName_",
+      "administratorFirstname_",
+      "administratorEmail_",
+      "administratorPwd_",
+      "administratorDate_",
     ],
-    "adminstratorSuppr_"
+    "administratorSuppr_"
   );
 }
 function updateAdministratorTable() {
-  // updateTable("nationality", "nationalities-list", "nationalityname_", "nationalitySuppr_");
-  alert("On veut déclencher la mise à jour de la table Administrateurs");
   updateComplexTable(
     "administrator",
     "administrators-list",
     [
-      "adminstratorName_",
-      "adminstratorFirstname_",
-      "adminstratorEmail_",
-      "adminstratorPwd_",
-      "adminstratorDate_",      
+      "administratorName_",
+      "administratorFirstname_",
+      "administratorEmail_",
+      "administratorPwd_",
+      "administratorDate_",      
     ],
-    "adminstratorSuppr_"
+    "administratorSuppr_"
   );
 }
 
@@ -200,16 +198,16 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
     let cells = tbodyRef.rows.item(i).cells;
     const aSupprimer = document.getElementById(nomSupression + i).checked;
     if (cells.item(0).innerHTML.includes("À définir") && !aSupprimer) {
-      alert ('Ligne '+i+' est une nouvelle ligne : vérifier les champs saisi');
-      let ligneDonnees = [];
+      // alert ('Ligne '+i+' est une nouvelle ligne : vérifier les champs saisi');
+      let ligneDonnees = "";
       let elementsAjoutes = 0;
       for (let j = 0; j < params.length; j++) {
         // alert('On traite le paramètre ' + params[j]);
         const valeur = document.getElementById(params[j] + i).value;
         if (valeur) {
           // alert ('Ligne '+i+' à ajouter : valeur ' + valeur);
-          // ligneDonnees.push({[params[j]]: valeur})
-          ligneDonnees[params[j]] = valeur;
+          ligneDonnees+=(j!==0?",":"{")+'"'+[params[j]]+'": "'+valeur+'"';
+          // ligneDonnees.push({valeur});
           elementsAjoutes++;
         // } else {
         //       alert ('Ligne '+i+' est vide. On ignore ');
@@ -223,14 +221,15 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
         // Gérer les erreurs.
         return;
       }
-      ligneAAjouter.push('{' + i + ':' + ligneDonnees + '}');
-      alert("Ligne Données ajoutés " + ligneDonnees);
-      alert("Lignes à ajouter " + ligneAAjouter);
-      ligneDonnees.forEach(function(item) {
-        Object.keys(item).forEach(function(key) {
-          alert("LigneDonnees key:" + key + "value:" + item[key]);
-        });
-      });
+      ligneDonnees+="}";
+      ligneAAjouter.push('"elem'+i+'": ' + ligneDonnees);
+      // let ligneString = "";
+
+      // ligneDonnees.forEach(function(entry) {
+      //   ligneString += entry;
+      // });
+      // alert("Ligne Données ajoutés " + ligneDonnees);
+      // alert("Lignes à ajouter " + ligneAAjouter);
       // ligneAAjouter.forEach(function(item) {
       //   Object.keys(item).forEach(function(key) {
       //     alert("ligneAAjouter key:" + key + "value:" + item[key]);
@@ -240,14 +239,14 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
         // alert ('Ligne '+i+' à supprimer. Valeur de clé '+cells.item(0).innerHTML);
         idASupprimer.push(cells.item(0).innerHTML);
     } else if (ligneModifiee(cells, params, i)) {
-      let ligneDonnees = [];
+      let ligneDonnees = "";
       let elementsValorises = 0;
       for (let j = 0; j < params.length; j++) {
         // alert('On traite le paramètre ' + params[j]);
         const valeur = document.getElementById(params[j] + i).value;
         if (valeur) {
           // alert ('Ligne '+i+' à modifier : valeur ' + valeur);
-          ligneDonnees[params[j]] = valeur;
+          ligneDonnees+=(j!==0?",":"{")+'"'+[params[j]]+'": "'+valeur+'"';
           elementsValorises++;
         // } else {
         //       alert ('Ligne '+i+' est vide. On ignore ');
@@ -255,8 +254,12 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
       }
       if (elementsValorises !== params.length) {
         // Cas particuliers de la table Administrator qui contient un mot de passe
-        if (!(elementsValorises+1 === params.length && params[3] === "adminstratorPwd_" && document.getElementById("adminstratorPwd_" + i).value === "")) {
-          alert("Exception !!\n"+elementsValorises+" VS "+params.length);
+        // alert("D'après le test : \n " + elementsValorises +"+1 === " + params.length + " vaut " + (elementsValorises+1 === params.length?"TRUE":"FALSE")
+        // + "\n && " + params[3] + "=== administratorPwd_ vaut " + (params[3] === "administratorPwd_"?"TRUE":"FALSE")
+        // + "\n && document.getElementById(administratorPwd_" + i + ").value === \"\" vaut " + (document.getElementById("administratorPwd_" + i).value === ""?"TRUE":"FALSE"));
+        // alert("Donc le test vaut " + (!(elementsValorises+1 === params.length && params[3] === "administratorPwd_" && document.getElementById("administratorPwd_" + i).value === "")?"TRUE":"FALSE"));
+        if (!(elementsValorises+1 === params.length && params[3] === "administratorPwd_" && document.getElementById("administratorPwd_" + i).value === "")) {
+          // alert("Exception !!\n"+elementsValorises+" VS "+params.length);
           // for (let j = 0; j < params.length; j++) {
           //   alert('On parcours la ligneCréee : '+j+' = ' + ligneDonnees[params[j]]);
           // }
@@ -264,8 +267,8 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
           return;
         }
       }
-      ligneAModifier.push('{"' + cells.item(0).innerHTML + '":"' + ligneDonnees + '"}');
-
+      ligneDonnees+=', "administratorId_": "' + cells.item(0).innerHTML + '"}';
+      ligneAModifier.push('"elem'+i+'": ' + ligneDonnees);
 
       //   if (valeur) {
       //     ligneAModifier.push(
@@ -281,18 +284,18 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
     idASupprimer.length !== 0 ||
     ligneAModifier.length !== 0
   ) {
-    alert("Mise à jour des tables - appel backOffice");
-    alert("Données envoyés \n"+
-      "\nElements ajoués : " + ligneAAjouter.length +
-      "\nElements supprimés : " + idASupprimer.length +
-      "\nElements modifiés : " + ligneAModifier.length
-    );
+    // alert("Mise à jour des tables - appel backOffice");
+    // alert("Données envoyés \n"+
+    //   "\nElements ajoués : " + ligneAAjouter.length +
+    //   "\nElements supprimés : " + idASupprimer.length +
+    //   "\nElements modifiés : " + ligneAModifier.length
+    // );
 
     // const formMission = document.getElementById("typeMission");
     let formData = new FormData();
-    formData.append("ajout", ligneAAjouter);
+    formData.append("ajout", "{"+ligneAAjouter+"}");
     formData.append("suppression", idASupprimer);
-    formData.append("modification", ligneAModifier);
+    formData.append("modification", "{"+ligneAModifier+"}");
 
     let detailForm = "";
     for (var key in formData) {
@@ -308,7 +311,7 @@ function updateComplexTable(nomTable, nomListe, params, nomSupression) {
         if (response.ok) {
           // Lance un rechargement de la page pour mettre les données à jour
           // notamment en cas de DELETE CASCADE imposée par une suppression
-          // location.reload();
+          location.reload();
           // alert("Reponse OK !");
         } else {
           // document.getElementById("formulaire_erreurs_adresse").innerHTML = "Impossible de modifier l'adresse - Réessayer ulétrieurement<br/>";

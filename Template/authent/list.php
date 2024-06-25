@@ -202,21 +202,21 @@ if (isset($_SESSION['user'])) {
 
         echo '<td>' . $administrator->getId() . '</td>';
         echo '<td style="display:none;">' . $administrator->getName() . '</td>';
-        echo '<td><input type="text" id="adminstratorName_'.$index.'" name="adminstratorName_'.$index.'" value="' . $administrator->getName() . '" /></td>';
+        echo '<td><input type="text" id="administratorName_'.$index.'" name="administratorName_'.$index.'" value="' . $administrator->getName() . '" /></td>';
         
         echo '<td style="display:none;">' . $administrator->getFirstName() . '</td>';
-        echo '<td><input type="text" id="adminstratorFirstname_'.$index.'" name="adminstratorFirstname_'.$index.'" value="' . $administrator->getFirstName() . '" /></td>';
+        echo '<td><input type="text" id="administratorFirstname_'.$index.'" name="administratorFirstname_'.$index.'" value="' . $administrator->getFirstName() . '" /></td>';
         
         echo '<td style="display:none;">' . $administrator->getEmail() . '</td>';
-        echo '<td><input type="text" id="adminstratorEmail_'.$index.'" name="adminstratorEmail_'.$index.'" value="' . $administrator->getEmail() . '" /></td>';
+        echo '<td><input type="text" id="administratorEmail_'.$index.'" name="administratorEmail_'.$index.'" value="' . $administrator->getEmail() . '" /></td>';
         
         echo '<td style="display:none;"></td>';
-        echo '<td><input type="text" id="adminstratorPwd_'.$index.'" name="adminstratorPwd_'.$index.'" value="" /></td>';
+        echo '<td><input type="text" id="administratorPwd_'.$index.'" name="administratorPwd_'.$index.'" value="" /></td>';
         
         echo '<td style="display:none;">' . $administrator->getCreationDate()->format('Y-m-d') . '</td>';
-        echo '<td><input type="text" id="adminstratorDate_'.$index.'" name="adminstratorDate_'.$index.'" value="' . $administrator->getCreationDate()->format('Y-m-d') . '" /></td>';
+        echo '<td><input type="text" id="administratorDate_'.$index.'" name="administratorDate_'.$index.'" value="' . $administrator->getCreationDate()->format('Y-m-d') . '" /></td>';
         
-        echo '<td><input type="checkbox" id="adminstratorSuppr_'.$index.'" name="adminstratorSuppr_'.$index.'" /></td>';
+        echo '<td><input type="checkbox" id="administratorSuppr_'.$index.'" name="administratorSuppr_'.$index.'" /></td>';
                 
         echo '</tr>';
         $index++;

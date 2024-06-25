@@ -56,12 +56,12 @@ class AjaxController extends Controller
             if (isset($_POST['ajout']) && !empty($_POST['ajout'])) {
                 $ajouts = explode(',', $_POST['ajout']);
                 // $contenuPost.= "<br/>Nb d'éléments à ajouter : ".count($ajouts);
-                $this->ajouteMissionType($ajouts, $repository);
+                $this->ajouteElements($ajouts, $repository);
             }
             if (isset($_POST['suppression']) && !empty($_POST['suppression'])) {
                 $suppressions = explode(',', $_POST['suppression']);
                 // $contenuPost.= "<br/>Nb d'éléments à supprimer : ".count($suppressions);
-                $this->supprimeMissionType($suppressions, $repository);    
+                $this->supprimeElements($suppressions, $repository);    
             }
             if (isset($_POST['modification']) && !empty($_POST['modification'])) {
                 // $contenuPost.= "<br/>Modification : ".$_POST['modification'];
@@ -84,7 +84,7 @@ class AjaxController extends Controller
                 //     $contenuPost.= "<br/>Clé : ". $key[0] . ", Element : ".$modification[$key[0]];
                 // }
 
-                $this->modifieMissionType($modificationArray, $repository);
+                $this->modifieElements($modificationArray, $repository);
             }
 
             throw new \Exception("Effet Traitement : ".$contenuPost);
@@ -98,43 +98,40 @@ class AjaxController extends Controller
     protected function applyDataComplexe($repository)
     {
         try {
-            $contenuPost = "";
+            // $contenuPost = "";
 
-            if (isset($_POST['ajout']) && !empty($_POST['ajout'])) {
-                $ajouts = explode(',', $_POST['ajout']);
-                $contenuPost.= "<br/>Nb d'éléments à ajouter : ".count($ajouts);
-                // $this->ajouteMissionType($ajouts, $repository);
+            if (isset($_POST['ajout']) && !empty($_POST['ajout']) && $_POST['ajout'] != "{}") {
+                $ajouts = json_decode($_POST['ajout'], true); 
+                // $contenuPost.= "<hr/><br/>Nb d'éléments à ajouter : ".count($ajouts);
+                // $contenuPost.= "<br/>".implode(", ", array_keys($ajouts));
+                // foreach ($ajouts as $ajout) {
+                //     foreach (array_keys($ajout) as $key){
+                //         $contenuPost.= "<br/>Clé = ". $key ." : Valeur = ". $ajout[$key];
+                //     }
+                // }
+                
+                $this->ajouteElements($ajouts, $repository);
             }
             if (isset($_POST['suppression']) && !empty($_POST['suppression'])) {
                 $suppressions = explode(',', $_POST['suppression']);
-                $contenuPost.= "<br/>Nb d'éléments à supprimer : ".count($suppressions);
-                // $this->supprimeMissionType($suppressions, $repository);    
+                // $contenuPost.= "<br/>Nb d'éléments à supprimer : ".count($suppressions);
+                $this->supprimeElements($suppressions, $repository);    
             }
-            if (isset($_POST['modification']) && !empty($_POST['modification'])) {
-                $contenuPost.= "<br/>Modification : ".$_POST['modification'];
-                $modifications = explode(',', $_POST['modification']);
-                $modificationArray = [];
-                $i=0;
-                foreach ($modifications as $modification) {
-                    $contenuPost.= "<br/>Type élément : ".gettype($modification);
-                    $contenuPost.= "<br/>Contenu élément : ".$modification;
-                    $modificationArray[] = json_decode($modification, true);
-                    $contenuPost.= "<br/>Type modificationArray[] : ".gettype($modificationArray[$i]);
-                    $contenuPost.= "<br/>Ligne modificationArray[] : ".print_r($modificationArray[$i], true);;
-                    $contenuPost.= "<br/>Ligne du tableau en chaîne - version 1 : ".var_dump(json_decode($modification, true));
-                    $contenuPost.= "<br/>Ligne du tableau en chaîne - version 2 : ".var_dump(json_decode($modification));      
-                    $i++;
-                }
-                $contenuPost.= "<br/>Nb d'éléments à modifier : ".count($modifications);
-                foreach ($modificationArray as $modification) {
-                    $key = array_keys($modification);
-                    $contenuPost.= "<br/>Clé : ". $key[0] . ", Element : ".$modification[$key[0]];
-                }
+            if (isset($_POST['modification']) && !empty($_POST['modification']) && $_POST['modification'] != "{}") {
+                // $contenuPost.= "<br/>Modification : ".$_POST['modification'];
+                $modifications = json_decode($_POST['modification'], true); 
+                // $contenuPost.= "<hr/><br/>Nb d'éléments à modifier : ".count($modifications);
+                // $contenuPost.= "<br/>".implode(", ", array_keys($modifications));
+                // foreach ($modifications as $modification) {
+                //     foreach (array_keys($modification) as $key){
+                //         $contenuPost.= "<br/>Clé = ". $key ." : Valeur = ". $modification[$key];
+                //     }
+                // }
 
-                // $this->modifieMissionType($modificationArray, $repository);
+                $this->modifieElements($modifications, $repository);
             }
 
-            throw new \Exception("Effet Traitement : ".$contenuPost);
+            // throw new \Exception("Effet Traitement : ".$contenuPost);
         } catch (\Exception $e) {
             $this->render('/errors/default', [
                 'error' => $e->getMessage(),
@@ -142,7 +139,7 @@ class AjaxController extends Controller
         }
     }
     
-    private function ajouteMissionType($ajouts, $repository): void {
+    private function ajouteElements($ajouts, $repository): void {
         try {
             //$missionTypeRepository = new MissionTypeRepository();
 
@@ -157,7 +154,7 @@ class AjaxController extends Controller
         } 
     }
 
-    private function supprimeMissionType($suppressions, $repository): void {
+    private function supprimeElements($suppressions, $repository): void {
         try {
             // $missionTypeRepository = new MissionTypeRepository();
          
@@ -173,14 +170,18 @@ class AjaxController extends Controller
         } 
     }
 
-    private function modifieMissionType($modifications, $repository): void {
+    private function modifieElements($modifications, $repository): void {
         try {
             // $missionTypeRepository = new MissionTypeRepository();
 
             // Mise à jour de chaque ligne
             foreach ($modifications as $modification) {
                 $key = array_keys($modification);
-                $repository->update($key[0], $modification[$key[0]]);
+                if (count($key) == 1) {
+                    $repository->update($key[0], $modification[$key[0]]);
+                } else {
+                    $repository->update($modification);
+                }
             }
 
         } catch (\Exception $e) {
